@@ -1,0 +1,4 @@
+Flask
+django
+gunicorn
+django-heroku
