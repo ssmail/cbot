@@ -19,4 +19,10 @@ def func():
     print(10 * "---")
     pprint(request.form)
 
-    return jsonify({"welcome": "world"})
+    return jsonify(
+        {
+            "args": request.args,
+            "json": request.json,
+            "form": request.form
+        }
+    )
