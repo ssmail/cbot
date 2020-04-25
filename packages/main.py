@@ -1,14 +1,10 @@
 from flask import Flask, jsonify
 from slacker import Slacker
+from requests.sessions import Session
 
 app = Flask(__name__)
 
-from requests.sessions import Session
-
-token = 'xoxb-1066881550131-1083566751251-swhs1IarrFt965IBcyzhlcCU'
-
-session = Session()
-slack = Slacker(token, session=session)
+token = 'xoxb-1066881550131-1083566751251-EpMmCsKotQoJSBcfl0Lk6JtZ'
 
 
 @app.route("/")
@@ -18,5 +14,7 @@ def home_view():
 
 @app.route("/test")
 def func():
-    slack.chat.post_message('#slacktestproject', 'this is a test from cbot api')
-    return jsonify({"welcome": "world"})
+    with Session() as session:
+        slack = Slacker(token, session=session)
+        slack.chat.post_message('#allmember', 'this is a test')
+        return jsonify({"welcome": "world"})
