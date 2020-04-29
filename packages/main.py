@@ -10,6 +10,16 @@ def home_view():
     return "<h1>Welcome to Geeks for Geeks</h1>"
 
 
+@app.route("/message", methods=['GET', 'POST'])
+def channel_message():
+    print(10 * "---")
+    pprint(request.args)
+    print(10 * "---")
+    pprint(request.json)
+    print(10 * "---")
+    pprint(request.form)
+
+
 @app.route("/test", methods=['GET', 'POST'])
 def func():
     print(10 * "---")
