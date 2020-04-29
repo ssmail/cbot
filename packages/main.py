@@ -46,12 +46,14 @@ def query():
 
     print(f"query: channel: {channel}, username:  {username}")
     show()
+    return jsonify({"message": last_message})
 
 
 @app.route("/clean", methods=['GET', 'POST'])
 def clean():
     last_message.clear()
     show()
+    return jsonify({"message": last_message})
 
 
 def show():
