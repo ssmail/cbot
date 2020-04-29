@@ -12,4 +12,5 @@ def home_view():
 def channel_message():
     print("\n\n")
     print(request.json)
+    print("\n\n")
     return request.json
