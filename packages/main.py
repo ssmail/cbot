@@ -12,16 +12,7 @@ def home_view():
 
 @app.route("/message", methods=['GET', 'POST'])
 def channel_message():
-    print(10 * "---: request.args")
-    pprint(request.args)
-    print(10 * "--- request.json")
-    pprint(request.json)
-    print(10 * "--- request.form")
-    pprint(request.form)
-
-    pprint("respone json: ")
-    pprint({"challenge": request.json['challenge']})
-    return jsonify({"challenge": request.json['challenge']})
+    return request.json
 
 
 @app.route("/test", methods=['GET', 'POST'])
