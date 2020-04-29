@@ -12,6 +12,7 @@ def home_view():
 
 @app.route("/message", methods=['GET', 'POST'])
 def channel_message():
+    print(request.json)
     return request.json
 
 
