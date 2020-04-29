@@ -18,12 +18,9 @@ def channel_message():
 
 @app.route("/test", methods=['GET', 'POST'])
 def func():
-    print(10 * "---")
-    pprint(request.args)
-    print(10 * "---")
-    pprint(request.json)
-    print(10 * "---")
-    pprint(request.form)
+    print(request.args)
+    print(request.json)
+    print(request.form)
 
     return jsonify(
         {
