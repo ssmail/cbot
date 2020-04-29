@@ -18,6 +18,7 @@ def channel_message():
     pprint(request.json)
     print(10 * "---")
     pprint(request.form)
+    return "message recved"
 
 
 @app.route("/test", methods=['GET', 'POST'])
