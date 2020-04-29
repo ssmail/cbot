@@ -53,7 +53,9 @@ def build_message(resp):
         'create_by': get_value(resp, "created_by"),
     }
 
-    return dict_message
+    print(dict_message)
+    zoom_message = ZoomVisibleMessage(**dict_message)
+    return zoom_message
 
 
 def get_value(j, key, index=0):
