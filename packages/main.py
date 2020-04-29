@@ -14,3 +14,18 @@ def channel_message():
     print(request.json)
     print("\n\n")
     return request.json
+
+
+@app.route("/command", methods=['GET', 'POST'])
+def channel_message():
+    print("\n\n")
+    print(request.json)
+    print("\n\n")
+
+    return jsonify(
+        {
+            "args": request.args,
+            "json": request.json,
+            "form": request.form
+        }
+    )
