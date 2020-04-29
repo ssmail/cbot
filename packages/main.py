@@ -6,6 +6,8 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
+last_message = []
+
 
 @app.route("/")
 def home_view():
@@ -16,7 +18,8 @@ def home_view():
 def channel_message():
     print("\n\n")
     print(request.json)
-    build_message(request.json)
+    last_message.append(build_message(request.json))
+
     print("\n\n")
     return request.json
 
@@ -38,6 +41,20 @@ def command():
 
 @app.route("/query", methods=['GET', 'POST'])
 def query():
-    print(request.args)
     channel = request.args['channel']
     username = request.args['username']
+
+    print(f"query: channel: {channel}, username:  {username}")
+    show()
+
+
+@app.route("/clean", methods=['GET', 'POST'])
+def clean():
+    last_message.clear()
+    show()
+
+
+def show():
+    print(f"last_message length: ----- {len(last_message)}")
+    for i in last_message:
+        print(i)
