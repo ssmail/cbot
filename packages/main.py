@@ -1,3 +1,7 @@
+from dataclasses import dataclass
+
+from packages.utils import build_message
+
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
@@ -12,6 +16,7 @@ def home_view():
 def channel_message():
     print("\n\n")
     print(request.json)
+    build_message(request.json)
     print("\n\n")
     return request.json
 
@@ -29,3 +34,10 @@ def command():
             "form": request.form
         }
     )
+
+
+@app.route("/query", methods=['GET', 'POST'])
+def query():
+    print(request.args)
+    channel = request.args['channel']
+    username = request.args['username']
