@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python3
 # author = CarterHong
+import re
 from dataclasses import dataclass
 
 
@@ -34,6 +35,7 @@ class ZoomVisibleMessage:
     message_type: str
     subtype: str
     password: str
+    password_text: str
     date_start: str
     bot_id: str
     create_by: str
@@ -47,7 +49,8 @@ def build_message(resp):
         "meeting_id": get_value(resp, "display_id"),
         "message_type": get_value(resp, "type"),
         "subtype": get_value(resp, "subtype"),
-        "password": get_value(resp, "text", 1),
+        "password_text": get_value(resp, "text", 1),
+        "password": get_password(get_value(resp, "text", 1)),
         'date_start': get_value(resp, "ts"),
         'bot_id': get_value(resp, "bot_id"),
         'create_by': get_value(resp, "created_by"),
@@ -58,9 +61,22 @@ def build_message(resp):
     return zoom_message
 
 
+def get_password(text) -> str:
+    return extract_info_from_text(r"password:\s(\w+)", text)
+
+
+def extract_info_from_text(re_str, text):
+    if text:
+        try:
+            return re.findall(re_str, text)[0]
+        except IndexError:
+            pass
+
+    return ""
+
+
 def get_value(j, key, index=0):
     try:
-        l = extract_values(j, key)
-        return l[index]
+        return extract_values(j, key)[index]
     except:
         return ""
