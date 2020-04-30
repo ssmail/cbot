@@ -43,7 +43,7 @@ def build_message(resp):
     dict_message = {
         'user_id': resp['authed_users'][0],
         "channel": get_value(resp, "channel"),
-        "title": get_value(resp, "text"),
+        "title": get_value(resp, "name"),
         "meeting_id": get_value(resp, "display_id"),
         "message_type": get_value(resp, "type"),
         "subtype": get_value(resp, "subtype"),
