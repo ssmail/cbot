@@ -1,7 +1,4 @@
-from dataclasses import dataclass
-
 from packages.utils import build_message
-
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
