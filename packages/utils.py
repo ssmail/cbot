@@ -63,5 +63,4 @@ def get_value(j, key, index=0):
         l = extract_values(j, key)
         return l[index]
     except:
-        pass
-    return ""
+        return ""

@@ -15,7 +15,9 @@ def home_view():
 def channel_message():
     print("\n\n")
     print(request.json)
-    last_message.append(build_message(request.json))
+    zoom_msg = build_message(request.json)
+    if zoom_msg.bot_id != "":
+        last_message.append(zoom_msg)
 
     print("\n\n")
     return request.json
@@ -38,22 +40,26 @@ def command():
 
 @app.route("/query", methods=['GET', 'POST'])
 def query():
-    channel = request.args['channel']
-    username = request.args['username']
-
-    print(f"query: channel: {channel}, username:  {username}")
-    show()
-    return jsonify({"message": last_message})
+    key = request.args.get("key", None)
+    if key == "hkf":
+        show()
+        return jsonify({"message": last_message})
+    else:
+        return "bad request"
 
 
 @app.route("/clean", methods=['GET', 'POST'])
 def clean():
-    last_message.clear()
-    show()
-    return jsonify({"message": last_message})
+    key = request.args.get("key", None)
+    if key == "hkf":
+        last_message.clear()
+        show()
+        return jsonify({"message": last_message})
+    else:
+        return "bad request"
 
 
 def show():
-    print(f"last_message length: ----- {len(last_message)}")
+    print(f"\n\nlast_message length: ----- {len(last_message)}")
     for i in last_message:
         print(i)
