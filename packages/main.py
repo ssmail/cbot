@@ -26,8 +26,9 @@ def channel_message():
 @app.route("/command", methods=['GET', 'POST'])
 def command():
     print("\n\n")
-
-    print(request.json)
+    print(request.request.headers)
+    print("\n")
+    print(request.request.json)
     print("\n\n")
 
     return jsonify(
