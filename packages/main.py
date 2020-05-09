@@ -26,6 +26,7 @@ def channel_message():
 @app.route("/command", methods=['GET', 'POST'])
 def command():
     print("\n\n")
+
     print(request.json)
     print("\n\n")
 
@@ -33,7 +34,8 @@ def command():
         {
             "args": request.args,
             "json": request.json,
-            "form": request.form
+            "form": request.form,
+            "headers": request.headers,
         }
     )
 
