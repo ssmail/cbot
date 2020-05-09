@@ -36,7 +36,6 @@ def command():
             "args": request.args,
             "json": request.json,
             "form": request.form,
-            "headers": request.headers,
         }
     )
 
