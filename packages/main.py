@@ -19,7 +19,7 @@ def alive():
 
 @app.route("/message", methods=['GET', 'POST'])
 def channel_message():
-    logging.info(f"\nmessage: {request.json} \n")
+    logging.info(f"\n{request.json} \n")
     try:
         zoom_msg = build_message(request.json)
         if zoom_msg.bot_id == ZOOM_BOT_ID:
@@ -28,12 +28,14 @@ def channel_message():
     except Exception:
         logging.error("add zoom msgbox failed")
     finally:
-        return request.json
+        if request.json:
+            return request.json
+        else:
+            return "hello"
 
 
 @app.route("/command", methods=['GET', 'POST'])
 def command():
-    logging.info(f"command: {request.form}")
     return jsonify(
         {
             "args": request.args,
