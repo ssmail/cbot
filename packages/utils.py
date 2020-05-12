@@ -3,6 +3,7 @@
 # author = CarterHong
 import json
 import re
+from dataclasses import dataclass
 
 from sqlalchemy.orm import class_mapper
 
@@ -28,33 +29,19 @@ def extract_values(obj, key):
     return results
 
 
+@dataclass
 class ZoomVisibleMessage:
-    def __init__(self, user_id,
-                 channel,
-                 title,
-                 meeting_id,
-                 message_type,
-                 subtype,
-                 password,
-                 password_text,
-                 date_start,
-                 bot_id,
-                 create_by):
-        self.user_id = user_id
-        self.channel = channel
-        self.title = title
-        self.meeting_id = meeting_id
-        self.message_type = message_type
-        self.subtype = subtype
-        self.password = password
-        self.password_text = password_text
-        self.date_start = date_start
-        self.bot_id = bot_id
-        self.create_by = create_by
-
-    @property
-    def json(self):
-        return self.__dict__
+    user_id: str
+    channel: str
+    title: str
+    meeting_id: str
+    message_type: str
+    subtype: str
+    password: str
+    password_text: str
+    date_start: str
+    bot_id: str
+    create_by: str
 
 
 def build_message(resp):
@@ -72,8 +59,7 @@ def build_message(resp):
         'create_by': get_value(resp, "created_by"),
     }
 
-    zoom_message = ZoomVisibleMessage(**dict_message)
-    return zoom_message
+    return ZoomVisibleMessage(**dict_message)
 
 
 def get_password(text) -> str:

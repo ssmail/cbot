@@ -19,10 +19,10 @@ def alive():
 def channel_message():
     logging.info(f"\nmessage: {request.json} \n")
     zoom_msg = build_message(request.json)
-    logging.info(f"zoom box: {zoom_msg.json}\n")
+    logging.info(f"zoom box: {zoom_msg}\n")
 
     if zoom_msg.bot_id != "":
-        last_message.append(zoom_msg.json)
+        last_message.append(zoom_msg)
     return "success"
 
 
