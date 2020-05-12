@@ -6,7 +6,9 @@ import logging
 
 app = Flask(__name__)
 
-last_message = []
+zoom_message = []
+chat_message = []
+
 query_key = ['online_1132683036224', 'dev_1232683036224']
 ZOOM_BOT_ID = 'B012AA1UZ5H'
 ZOOM_DEV_BOT_ID = "B01352MV8SJ"
@@ -24,7 +26,9 @@ def channel_message():
         zoom_msg = build_message(request.json)
         if zoom_msg.bot_id == ZOOM_BOT_ID or zoom_msg.bot_id == ZOOM_DEV_BOT_ID:
             logging.info(f"zoom box: {zoom_msg}\n")
-            last_message.append(zoom_msg)
+            zoom_message.append(zoom_msg)
+        else:
+            chat_message.append(request.json)
     except Exception:
         logging.error("add zoom msgbox failed")
     finally:
@@ -50,7 +54,9 @@ def query():
     logging.info(f"command: {request.args}")
     key = request.args.get("key", None)
     if key in query_key:
-        return jsonify({"message": last_message})
+        return jsonify(
+            {"zoom_message": zoom_message, "chat_message": chat_message}
+        )
     else:
         logging.error(f"bad request: {request.remote_addr}")
         return "bad request"
@@ -60,8 +66,11 @@ def query():
 def clean():
     key = request.args.get("key", None)
     if key in query_key:
-        last_message.clear()
-        return jsonify({"message": last_message})
+        zoom_message.clear()
+        chat_message.clear()
+        return jsonify(
+            {"message": zoom_message, "chat_message": chat_message}
+        )
     else:
         logging.error(f"bad request: {request.remote_addr}")
         return "bad request"
