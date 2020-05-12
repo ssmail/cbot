@@ -17,11 +17,13 @@ def alive():
 
 @app.route("/message", methods=['GET', 'POST'])
 def channel_message():
-    logging.info("message: {}".format(request.json))
+    logging.info(f"message: {request.json}")
+    logging.info("-------------------\n")
     zoom_msg = build_message(request.json)
+
+    logging.info(f"zoom box: {zoom_msg.json}")
     if zoom_msg.bot_id != "":
         last_message.append(zoom_msg.json)
-    logging.info(last_message)
     return "success"
 
 
@@ -41,9 +43,7 @@ def command():
 def query():
     logging.info(f"command: {request.args}")
     key = request.args.get("key", None)
-
     if key in query_key:
-        logging.info("")
         return jsonify({"message": last_message})
     else:
         logging.error(f"bad request: {request.remote_addr}")
@@ -53,7 +53,6 @@ def query():
 @app.route("/clean", methods=['GET', 'POST'])
 def clean():
     key = request.args.get("key", None)
-    logging.info(f"command: {request.args}")
     if key in query_key:
         last_message.clear()
         return jsonify({"message": last_message})
