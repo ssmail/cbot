@@ -51,6 +51,9 @@ class ZoomVisibleMessage:
         self.bot_id = bot_id
         self.create_by = create_by
 
+    def __str__(self):
+        return json.dumps(self.__dict__)
+
 
 def build_message(resp):
     dict_message = {
@@ -67,7 +70,6 @@ def build_message(resp):
         'create_by': get_value(resp, "created_by"),
     }
 
-    print(dict_message)
     zoom_message = ZoomVisibleMessage(**dict_message)
     return zoom_message
 
