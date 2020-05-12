@@ -1,6 +1,7 @@
-Flask
+Flask~=1.1.1
 gunicorn
 slacker
 requests
-coloredlogs
-pyyaml
+coloredlogs~=14.0
+pyyaml~=5.3.1
+SQLAlchemy~=1.3.16s

@@ -3,7 +3,6 @@
 # author = CarterHong
 import json
 import re
-from dataclasses import dataclass
 
 from sqlalchemy.orm import class_mapper
 
