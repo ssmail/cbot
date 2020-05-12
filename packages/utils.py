@@ -5,6 +5,8 @@ import json
 import re
 from dataclasses import dataclass
 
+from sqlalchemy.orm import class_mapper
+
 
 def extract_values(obj, key):
     """Pull all values of specified key from nested JSON."""
@@ -54,8 +56,10 @@ class ZoomVisibleMessage:
     def __str__(self):
         return json.dumps(self.__dict__)
 
-    def __repr__(self):
-        return json.dumps(self.__dict__)
+    @property
+    def json(self):
+        columns = [c.key for c in class_mapper(self.__class__).columns]
+        return dict((c, getattr(self, c)) for c in columns)
 
 
 def build_message(resp):

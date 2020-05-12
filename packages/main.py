@@ -20,8 +20,8 @@ def channel_message():
     logging.info("message: {}".format(request.json))
     zoom_msg = build_message(request.json)
     if zoom_msg.bot_id != "":
-        last_message.append(json.dumps(zoom_msg))
-
+        last_message.append(zoom_msg.json)
+    logging.info(last_message)
     return request.json
 
 
