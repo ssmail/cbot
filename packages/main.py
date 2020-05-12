@@ -8,6 +8,8 @@ app = Flask(__name__)
 
 last_message = []
 query_key = ['online_1132683036224', 'dev_1232683036224']
+ZOOM_BOT_ID = 'B012AA1UZ5H'
+ZOOM_DEV_BOT_ID = "B012AA1UZ5H"
 
 
 @app.route("/")
@@ -19,11 +21,10 @@ def alive():
 def channel_message():
     logging.info(f"\nmessage: {request.json} \n")
     zoom_msg = build_message(request.json)
-    logging.info(f"zoom box: {zoom_msg}\n")
-
-    if zoom_msg.bot_id != "":
+    if zoom_msg.bot_id == ZOOM_BOT_ID:
+        logging.info(f"zoom box: {zoom_msg}\n")
         last_message.append(zoom_msg)
-    return "success"
+    return request.json
 
 
 @app.route("/command", methods=['GET', 'POST'])
