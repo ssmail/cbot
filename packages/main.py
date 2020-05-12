@@ -1,3 +1,5 @@
+import json
+
 from packages.utils import build_message
 from flask import Flask, jsonify, request
 import logging
@@ -18,7 +20,7 @@ def channel_message():
     logging.info("message: {}".format(request.json))
     zoom_msg = build_message(request.json)
     if zoom_msg.bot_id != "":
-        last_message.append(zoom_msg)
+        last_message.append(json.dumps(zoom_msg))
 
     return request.json
 
@@ -39,10 +41,12 @@ def command():
 def query():
     logging.info(f"command: {request.args}")
     key = request.args.get("key", None)
+
     if key in query_key:
+        logging.info("")
         return jsonify({"message": last_message})
     else:
-        logging.error(f"bad request: {request.remote_addr}, {request.environ['REMOTE_ADDR']}")
+        logging.error(f"bad request: {request.remote_addr}")
         return "bad request"
 
 
