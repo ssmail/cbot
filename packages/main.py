@@ -9,7 +9,7 @@ app = Flask(__name__)
 last_message = []
 query_key = ['online_1132683036224', 'dev_1232683036224']
 ZOOM_BOT_ID = 'B012AA1UZ5H'
-ZOOM_DEV_BOT_ID = "B012AA1UZ5H"
+ZOOM_DEV_BOT_ID = "B01352MV8SJ"
 
 
 @app.route("/")
@@ -22,7 +22,7 @@ def channel_message():
     logging.info(f"\n{request.json} \n")
     try:
         zoom_msg = build_message(request.json)
-        if zoom_msg.bot_id == ZOOM_BOT_ID:
+        if zoom_msg.bot_id == ZOOM_BOT_ID or zoom_msg.bot_id == ZOOM_DEV_BOT_ID:
             logging.info(f"zoom box: {zoom_msg}\n")
             last_message.append(zoom_msg)
     except Exception:
