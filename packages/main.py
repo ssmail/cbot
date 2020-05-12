@@ -22,7 +22,7 @@ def channel_message():
     if zoom_msg.bot_id != "":
         last_message.append(zoom_msg.json)
     logging.info(last_message)
-    return request.json
+    return "success"
 
 
 @app.route("/command", methods=['GET', 'POST'])

@@ -52,13 +52,9 @@ class ZoomVisibleMessage:
         self.bot_id = bot_id
         self.create_by = create_by
 
-    def __str__(self):
-        return json.dumps(self.__dict__)
-
     @property
     def json(self):
-        columns = [c.key for c in class_mapper(self.__class__).columns]
-        return dict((c, getattr(self, c)) for c in columns)
+        return self.__dict__
 
 
 def build_message(resp):
