@@ -20,10 +20,14 @@ def alive():
 @app.route("/message", methods=['GET', 'POST'])
 def channel_message():
     logging.info(f"\nmessage: {request.json} \n")
-    zoom_msg = build_message(request.json)
-    if zoom_msg.bot_id == ZOOM_BOT_ID:
-        logging.info(f"zoom box: {zoom_msg}\n")
-        last_message.append(zoom_msg)
+
+    try:
+        zoom_msg = build_message(request.json)
+        if zoom_msg.bot_id == ZOOM_BOT_ID:
+            logging.info(f"zoom box: {zoom_msg}\n")
+            last_message.append(zoom_msg)
+    except Exception:
+        logging.error("add zoom msgbox failed")
     return request.json
 
 
