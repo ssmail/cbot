@@ -2,3 +2,5 @@ Flask
 gunicorn
 slacker
 requests
+coloredlogs
+pyyaml

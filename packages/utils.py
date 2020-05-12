@@ -26,19 +26,21 @@ def extract_values(obj, key):
     return results
 
 
-@dataclass
 class ZoomVisibleMessage:
-    user_id: str
-    channel: str
-    title: str
-    meeting_id: str
-    message_type: str
-    subtype: str
-    password: str
-    password_text: str
-    date_start: str
-    bot_id: str
-    create_by: str
+    def __init__(self, user_id,
+                 channel,
+                 title,
+                 meeting_id, message_type, subtype, password, password_text, date_start,
+                 bot_id, create_by):
+        self.user_id = user_id
+        self.channel = channel
+        self.title = title
+        self.meeting_id = meeting_id
+        self.message_type = message_type
+        self.subtype = subtype
+        self.password = password
+        self.password_text = password_text
+        self.date_start = date_start
 
 
 def build_message(resp):

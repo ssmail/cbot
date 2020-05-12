@@ -1,36 +1,31 @@
 from packages.utils import build_message
 from flask import Flask, jsonify, request
+import logging
 
 app = Flask(__name__)
 
 last_message = []
+query_key = ['online_1132683036224', 'dev_1232683036224']
 
 
 @app.route("/")
-def home_view():
-    return "<h1>Welcome to slack for slack</h1>"
+def alive():
+    return "server is running"
 
 
 @app.route("/message", methods=['GET', 'POST'])
 def channel_message():
-    print("\n\n")
-    print(request.json)
+    logging.info("message: {}".format(request.json))
     zoom_msg = build_message(request.json)
     if zoom_msg.bot_id != "":
         last_message.append(zoom_msg)
 
-    print("\n\n")
     return request.json
 
 
 @app.route("/command", methods=['GET', 'POST'])
 def command():
-    print("\n\n")
-    print(request.headers)
-    print("\n")
-    print(request.json)
-    print("\n\n")
-
+    logging.info(f"command: {request.json}")
     return jsonify(
         {
             "args": request.args,
@@ -42,26 +37,22 @@ def command():
 
 @app.route("/query", methods=['GET', 'POST'])
 def query():
+    logging.info(f"command: {request.args}")
     key = request.args.get("key", None)
-    if key == "hkf":
-        show()
+    if key in query_key:
         return jsonify({"message": last_message})
     else:
+        logging.error(f"bad request: {request.remote_addr}")
         return "bad request"
 
 
 @app.route("/clean", methods=['GET', 'POST'])
 def clean():
     key = request.args.get("key", None)
-    if key == "hkf":
+    logging.info(f"command: {request.args}")
+    if key in query_key:
         last_message.clear()
-        show()
         return jsonify({"message": last_message})
     else:
+        logging.error(f"bad request: {request.remote_addr}")
         return "bad request"
-
-
-def show():
-    print(f"\n\nlast_message length: ----- {len(last_message)}")
-    for i in last_message:
-        print(i)
