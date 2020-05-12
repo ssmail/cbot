@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python3
 # author = CarterHong
+import json
 import re
 from dataclasses import dataclass
 
@@ -30,8 +31,14 @@ class ZoomVisibleMessage:
     def __init__(self, user_id,
                  channel,
                  title,
-                 meeting_id, message_type, subtype, password, password_text, date_start,
-                 bot_id, create_by):
+                 meeting_id,
+                 message_type,
+                 subtype,
+                 password,
+                 password_text,
+                 date_start,
+                 bot_id,
+                 create_by):
         self.user_id = user_id
         self.channel = channel
         self.title = title
@@ -41,6 +48,8 @@ class ZoomVisibleMessage:
         self.password = password
         self.password_text = password_text
         self.date_start = date_start
+        self.bot_id = bot_id
+        self.create_by = create_by
 
 
 def build_message(resp):
