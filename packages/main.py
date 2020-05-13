@@ -10,8 +10,10 @@ zoom_message = []
 chat_message = []
 
 query_key = ['online_1132683036224', 'dev_1232683036224']
+
 ZOOM_BOT_ID = 'B012AA1UZ5H'
 ZOOM_DEV_BOT_ID = "B01352MV8SJ"
+WORK_SPACE = []
 
 
 @app.route("/")
@@ -30,7 +32,7 @@ def channel_message():
         else:
             chat_message.append(request.json)
     except Exception:
-        logging.error("add zoom msgbox failed")
+        logging.error('add zoom msgbox failed')
     finally:
         if request.json:
             return request.json
@@ -55,7 +57,7 @@ def query():
     key = request.args.get("key", None)
     if key in query_key:
         return jsonify(
-            {"zoom_message": zoom_message, "chat_message": chat_message}
+            {"zoom_message": zoom_message}
         )
     else:
         logging.error(f"bad request: {request.remote_addr}")
