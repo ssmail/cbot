@@ -69,7 +69,7 @@ def query():
     if key in query_key:
         if msg_type == "zoom":
             return jsonify({"zoom_message": zoom_message})
-        else:
+        elif msg_type == "text":
             return jsonify({"normal_message": chat_message})
     else:
         logging.error(f"bad request: {request.remote_addr}")
