@@ -46,7 +46,7 @@ class ZoomVisibleMessage:
 
 def build_message(resp):
     dict_message = {
-        'user_id': resp['authed_users'][0],
+        'user_id': ensure_value(resp, 'authed_users'),
         "channel": get_value(resp, "channel"),
         "title": get_value(resp, "name"),
         "meeting_id": get_value(resp, "display_id"),
@@ -79,5 +79,12 @@ def extract_info_from_text(re_str, text):
 def get_value(j, key, index=0):
     try:
         return extract_values(j, key)[index]
+    except:
+        return ""
+
+
+def ensure_value(j, key):
+    try:
+        return j[key][0]
     except:
         return ""
