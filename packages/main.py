@@ -27,7 +27,7 @@ def channel_message():
     try:
         zoom_msg = build_message(request.json)
 
-        logging.info(zoom_msg + "\n")
+        logging.info(f"Zoom Msgbox: {zoom_msg}")
 
         if zoom_msg.bot_id == ZOOM_BOT_ID or zoom_msg.bot_id == ZOOM_DEV_BOT_ID:
             logging.info(f"zoom box: {zoom_msg}\n")
