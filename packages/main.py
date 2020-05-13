@@ -35,8 +35,9 @@ def channel_message():
         else:
             logging.info("this is a normal message")
             chat_message.append(request.json)
-    except Exception:
+    except Exception as e:
         logging.error('add zoom msgbox failed')
+        logging.exception(e)
     finally:
         if request.json:
             return request.json
