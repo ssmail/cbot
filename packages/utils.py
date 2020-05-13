@@ -63,7 +63,7 @@ def build_message(resp):
 
 
 def get_password(text) -> str:
-    return extract_info_from_text(r"password:\s(\w+)", text)
+    return extract_info_from_text(r"assword\s*:\s(\w+)", text)
 
 
 def extract_info_from_text(re_str, text):
