@@ -71,6 +71,9 @@ def query():
             return jsonify({"zoom_message": zoom_message})
         elif msg_type == "text":
             return jsonify({"normal_message": chat_message})
+        else:
+            logging.error(f"bad request: {request.remote_addr}")
+            return "bad request"
     else:
         logging.error(f"bad request: {request.remote_addr}")
         return "bad request"
