@@ -52,7 +52,7 @@ def build_message(resp):
         "meeting_id": get_value(resp, "display_id"),
         "message_type": get_value(resp, "type"),
         "subtype": get_value(resp, "subtype"),
-        "password_text": get_value(resp, "text", 1),
+        "text": get_value(resp, "text", 1),
         "password": get_password(get_value(resp, "text", 1)),
         'date_start': get_value(resp, "ts"),
         'bot_id': get_value(resp, "bot_id"),
