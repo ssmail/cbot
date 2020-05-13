@@ -33,11 +33,8 @@ def channel_message():
     logging.info(f"{request.json} \n")
     try:
         zoom_msg = build_message(request.json)
-
         logging.info(f"Zoom Msgbox: {zoom_msg}")
-
         if zoom_msg.bot_id in ZOOM_BOT_LIST:
-            logging.info(f"zoom box: {zoom_msg}\n")
             zoom_message.append(zoom_msg)
         else:
             logging.info("this is a normal message")
@@ -65,12 +62,15 @@ def command():
 
 @app.route("/query", methods=['GET', 'POST'])
 def query():
-    logging.info(f"command: {request.args}")
+    logging.info(f"query args: {request.args}")
     key = request.args.get("key", None)
+    msg_type = request.args.get("type", "zoom")
+
     if key in query_key:
-        return jsonify(
-            {"zoom_message": zoom_message}
-        )
+        if msg_type == "zoom":
+            return jsonify({"zoom_message": zoom_message})
+        else:
+            return jsonify({"normal_message": chat_message})
     else:
         logging.error(f"bad request: {request.remote_addr}")
         return "bad request"
