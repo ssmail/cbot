@@ -12,7 +12,14 @@ chat_message = []
 query_key = ['online_1132683036224', 'dev_1232683036224']
 
 ZOOM_BOT_ID = 'B012AA1UZ5H'
-ZOOM_DEV_BOT_ID = "B01352MV8SJ"
+ZOOM_DEV_BOT_ID_1 = "B01352MV8SJ"
+ZOOM_DEV_BOT_ID_2 = "B012VE561RV"
+
+ZOOM_BOT_LIST = [
+    ZOOM_BOT_ID,
+    ZOOM_DEV_BOT_ID_1,
+    ZOOM_DEV_BOT_ID_2
+]
 WORK_SPACE = []
 
 
@@ -29,7 +36,7 @@ def channel_message():
 
         logging.info(f"Zoom Msgbox: {zoom_msg}")
 
-        if zoom_msg.bot_id == ZOOM_BOT_ID or zoom_msg.bot_id == ZOOM_DEV_BOT_ID:
+        if zoom_msg.bot_id in ZOOM_BOT_LIST:
             logging.info(f"zoom box: {zoom_msg}\n")
             zoom_message.append(zoom_msg)
         else:
