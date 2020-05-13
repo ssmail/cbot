@@ -38,7 +38,7 @@ class ZoomVisibleMessage:
     message_type: str
     subtype: str
     password: str
-    password_text: str
+    text: str
     date_start: str
     bot_id: str
     create_by: str
