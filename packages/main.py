@@ -20,6 +20,7 @@ ZOOM_BOT_LIST = [
     ZOOM_DEV_BOT_ID_1,
     ZOOM_DEV_BOT_ID_2
 ]
+
 WORK_SPACE = []
 
 
@@ -31,8 +32,9 @@ def alive():
 @app.route("/message", methods=['GET', 'POST'])
 def channel_message():
     logging.info(f"{request.json} \n")
+    workspace = request.args.get('workspace', None)
     try:
-        zoom_msg = build_message(request.json)
+        zoom_msg = build_message(request.json, workspace)
         logging.info(f"Zoom Msgbox: {zoom_msg}")
         if zoom_msg.bot_id in ZOOM_BOT_LIST:
             zoom_message.append(zoom_msg)

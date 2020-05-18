@@ -31,6 +31,7 @@ def extract_values(obj, key):
 
 @dataclass
 class ZoomVisibleMessage:
+    workspace = ""
     user_id: str
     channel: str
     title: str
@@ -44,8 +45,9 @@ class ZoomVisibleMessage:
     create_by: str
 
 
-def build_message(resp):
+def build_message(resp, workspace):
     dict_message = {
+        'workspace': workspace,
         'user_id': ensure_value(resp, 'authed_users'),
         "channel": get_value(resp, "channel"),
         "title": get_value(resp, "name"),
