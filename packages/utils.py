@@ -31,7 +31,7 @@ def extract_values(obj, key):
 
 @dataclass
 class ZoomVisibleMessage:
-    workspace = ""
+    workspace: str
     user_id: str
     channel: str
     title: str
