@@ -5,8 +5,6 @@ import json
 import re
 from dataclasses import dataclass
 
-from sqlalchemy.orm import class_mapper
-
 
 def extract_values(obj, key):
     """Pull all values of specified key from nested JSON."""
