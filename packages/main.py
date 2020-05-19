@@ -9,7 +9,7 @@ app = Flask(__name__)
 zoom_message = []
 chat_message = []
 
-query_key = ['online_1132683036224', 'dev_1232683036224']
+query_key = ['ZytSVlBWc2swb2VGYlNXNklGR1Z1QT09']
 
 ZOOM_BOT_ID = 'B012AA1UZ5H'
 ZOOM_BOT_ID_2 = 'B013S9M3N69'
@@ -39,13 +39,14 @@ def alive():
 def channel_message():
     logging.info(f"{request.json} \n")
     workspace = request.args.get('workspace', None)
+
     try:
         zoom_msg = build_message(request.json, workspace)
         logging.info(f"Zoom Msgbox: {zoom_msg}")
         if zoom_msg.bot_id in ZOOM_BOT_LIST:
             zoom_message.append(zoom_msg)
         else:
-            logging.info("this is a normal message")
+            logging.info("this is not zoom message")
             chat_message.append(zoom_msg)
     except Exception as e:
         logging.error('add zoom msgbox failed')
@@ -61,6 +62,7 @@ def channel_message():
 def command():
     return jsonify(
         {
+            "headers": request.headers,
             "args": request.args,
             "json": request.json,
             "form": request.form,
@@ -70,18 +72,17 @@ def command():
 
 @app.route("/query", methods=['GET', 'POST'])
 def query():
-    logging.info(f"query args: {request.args}")
-    key = request.args.get("key", None)
+    key = request.headers.get('Query-Key')
     msg_type = request.args.get("type", "zoom")
 
-    if key in query_key:
-        if msg_type == "zoom":
-            return jsonify({"zoom_message": zoom_message})
-        elif msg_type == "text":
-            return jsonify({"normal_message": chat_message})
-        else:
-            logging.error(f"bad request: {request.remote_addr}")
-            return "bad request"
+    if key not in query_key:
+        logging.error(f"bad request: {request.remote_addr}")
+        return "bad request"
+
+    if msg_type == "zoom":
+        return jsonify({"zoom_message": zoom_message})
+    elif msg_type == "text":
+        return jsonify({"normal_message": chat_message})
     else:
         logging.error(f"bad request: {request.remote_addr}")
         return "bad request"
@@ -89,13 +90,12 @@ def query():
 
 @app.route("/clean", methods=['GET', 'POST'])
 def clean():
-    key = request.args.get("key", None)
+    key = request.headers.get('Query-Key')
     if key in query_key:
-        zoom_message.clear()
-        chat_message.clear()
-        return jsonify(
-            {"message": zoom_message, "chat_message": chat_message}
-        )
-    else:
         logging.error(f"bad request: {request.remote_addr}")
         return "bad request"
+
+    zoom_message.clear()
+    chat_message.clear()
+
+    return jsonify({"message": zoom_message, "chat_message": chat_message})

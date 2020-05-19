@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python3
 # author = CarterHong
-import json
+
 import re
 from dataclasses import dataclass
 
