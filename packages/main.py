@@ -9,7 +9,7 @@ app = Flask(__name__)
 zoom_message = []
 chat_message = []
 
-query_key = ['ZytSVlBWc2swb2VGYlNXNklGR1Z1QT09']
+keys = ['ZytSVlBWc2swb2VGYlNXNklGR1Z1QT09']
 
 ZOOM_BOT_ID = 'B012AA1UZ5H'
 ZOOM_BOT_ID_2 = 'B013S9M3N69'
@@ -74,8 +74,9 @@ def command():
 def query():
     key = request.headers.get('Query-Key')
     msg_type = request.args.get("type", "zoom")
+    logging.info(f"key: {key}, keys:{keys}")
 
-    if key not in query_key:
+    if key not in keys:
         logging.error(f"bad request: {request.remote_addr}")
         return "bad request"
 
@@ -91,7 +92,7 @@ def query():
 @app.route("/clean", methods=['GET', 'POST'])
 def clean():
     key = request.headers.get('Query-Key')
-    if key in query_key:
+    if key not in keys:
         logging.error(f"bad request: {request.remote_addr}")
         return "bad request"
 
