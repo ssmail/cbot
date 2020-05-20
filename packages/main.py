@@ -13,7 +13,6 @@ keys = ['ZytSVlBWc2swb2VGYlNXNklGR1Z1QT09']
 
 ZOOM_BOT_ID = 'B012AA1UZ5H'
 ZOOM_BOT_ID_2 = 'B013S9M3N69'
-
 ZOOM_DEV_BOT_ID_1 = "B01352MV8SJ"
 ZOOM_DEV_BOT_ID_2 = "B012VE561RV"
 
@@ -62,7 +61,6 @@ def channel_message():
 def command():
     return jsonify(
         {
-            "headers": request.headers,
             "args": request.args,
             "json": request.json,
             "form": request.form,
