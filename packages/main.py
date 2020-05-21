@@ -6,7 +6,6 @@ import logging
 
 app = Flask(__name__)
 
-zoom_message = []
 chat_message = []
 
 keys = ['ZytSVlBWc2swb2VGYlNXNklGR1Z1QT09']
@@ -29,6 +28,13 @@ ZOOM_BOT_LIST = [
 WORK_SPACE = []
 
 
+class ZoomMessage:
+    body = None
+
+
+zoom_message = ZoomMessage()
+
+
 @app.route("/")
 def alive():
     return "server is running"
@@ -43,7 +49,7 @@ def channel_message():
         zoom_msg = build_message(request.json, workspace)
         logging.info(f"Zoom Msgbox: {zoom_msg}")
         if zoom_msg.bot_id in ZOOM_BOT_LIST:
-            zoom_message.append(zoom_msg)
+            zoom_message.body = zoom_msg
         else:
             logging.info("this is not zoom message")
             chat_message.append(zoom_msg)
@@ -79,9 +85,9 @@ def query():
         return "bad request"
 
     if msg_type == "zoom":
-        return jsonify({"zoom_message": zoom_message})
+        return jsonify({"zoomMessage": zoom_message.body})
     elif msg_type == "text":
-        return jsonify({"normal_message": chat_message})
+        return jsonify({"normalMessage": chat_message})
     else:
         logging.error(f"bad request: {request.remote_addr}")
         return "bad request"
@@ -94,7 +100,7 @@ def clean():
         logging.error(f"bad request: {request.remote_addr}")
         return "bad request"
 
-    zoom_message.clear()
+    zoom_message.body = None
     chat_message.clear()
 
     return jsonify({"message": zoom_message, "chat_message": chat_message})
