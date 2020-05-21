@@ -1,4 +1,4 @@
-pkill gunicron
+pkill gunicorn
 
 git checkout .
 git pull
