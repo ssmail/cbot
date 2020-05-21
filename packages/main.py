@@ -48,7 +48,7 @@ def channel_message():
     try:
         zoom_msg = build_message(request.json, workspace)
         logging.info(f"Zoom Msgbox: {zoom_msg}")
-        if zoom_msg.bot_id in ZOOM_BOT_LIST:
+        if zoom_msg.botId in ZOOM_BOT_LIST:
             zoom_message.body = zoom_msg
         else:
             logging.info("this is not zoom message")
