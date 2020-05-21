@@ -45,17 +45,17 @@ class ZoomVisibleMessage:
 def build_message(resp, workspace):
     dict_message = {
         'workspace': workspace,
-        'user_id': ensure_value(resp, 'authed_users'),
+        'userId': ensure_value(resp, 'authed_users'),
         "channel": get_value(resp, "channel"),
         "title": get_value(resp, "name"),
-        "meeting_id": get_value(resp, "display_id"),
-        "message_type": get_value(resp, "type"),
+        "meetingId": get_value(resp, "display_id"),
+        "messageType": get_value(resp, "type"),
         "subtype": get_value(resp, "subtype"),
         "text": get_value(resp, "text", 1),
         "password": get_password(get_value(resp, "text", 1)),
-        'date_start': get_value(resp, "ts"),
-        'bot_id': get_value(resp, "bot_id"),
-        'create_by': get_value(resp, "created_by"),
+        'dateStart': get_value(resp, "ts"),
+        'botId': get_value(resp, "bot_id"),
+        'createBy': get_value(resp, "created_by"),
     }
 
     return ZoomVisibleMessage(**dict_message)
