@@ -33,7 +33,7 @@ class ZoomVisibleMessage:
     channel: str
     title: str
     meetingId: str
-    message_type: str
+    messageType: str
     subtype: str
     password: str
     text: str
