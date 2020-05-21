@@ -29,17 +29,17 @@ def extract_values(obj, key):
 @dataclass
 class ZoomVisibleMessage:
     workspace: str
-    user_id: str
+    userId: str
     channel: str
     title: str
-    meeting_id: str
+    meetingId: str
     message_type: str
     subtype: str
     password: str
     text: str
-    date_start: str
-    bot_id: str
-    create_by: str
+    dateStart: str
+    botId: str
+    createBy: str
 
 
 def build_message(resp, workspace):
