@@ -27,7 +27,7 @@ def extract_values(obj, key):
 
 
 @dataclass
-class ZoomVisibleMessage:
+class ZoomMessage:
     workspace: str
     userId: str
     channel: str
@@ -58,7 +58,7 @@ def build_message(resp, workspace):
         'createBy': get_value(resp, "created_by"),
     }
 
-    return ZoomVisibleMessage(**dict_message)
+    return ZoomMessage(**dict_message)
 
 
 def get_password(text) -> str:
