@@ -1,5 +1,6 @@
 import json
 
+from packages.slackapi import AuthenticatedSlackUser, SlackMessageService, ZoomCommand
 from packages.utils import build_message
 from flask import Flask, jsonify, request
 import logging
@@ -26,6 +27,10 @@ ZOOM_BOT_LIST = [
 ]
 
 WORK_SPACE = []
+
+
+class Token:
+    value = ""
 
 
 class ZoomMessage:
@@ -104,3 +109,46 @@ def clean():
     chat_message.clear()
 
     return jsonify({"message": zoom_message, "chat_message": chat_message})
+
+
+@app.route("/updateSlackToken", methods=['POST', 'GET'])
+def update_slack_token():
+    Token.value = request.json.get("token")
+    return jsonify({"token": Token.value})
+
+
+@app.route("/querySlackToken", methods=['POST', 'GET'])
+def querySlackToken():
+    return jsonify({"token": Token.value})
+
+
+@app.route("/sendMessage", methods=['POST', 'GET'])
+def send_message():
+    slack_user = request.json.get("slackAuthUser")
+    extend = request.json.get("extend")
+    command_type = request.json.get("command")
+
+    print(slack_user)
+    print("extend", extend)
+    print("command", command_type)
+
+    test_slack_user = AuthenticatedSlackUser(
+        **slack_user
+    )
+
+    print(test_slack_user)
+    authorization_user_bot = SlackMessageService(test_slack_user)
+
+    if command_type == "zoom":
+        resp = authorization_user_bot.send_command_to_channel("C011V2G61P1", ZoomCommand.Zoom)
+        return jsonify(resp)
+    elif command_type == "zoom_meeting_topic":
+        resp = authorization_user_bot.send_command_to_channel("C011V2G61P1", ZoomCommand.ZoomMeetingTopic, topic=extend)
+        return jsonify(resp)
+    elif command_type == "zoom_join_me":
+        resp = authorization_user_bot.send_command_to_channel("C011V2G61P1", ZoomCommand.ZoomJoinMe)
+        return jsonify(resp)
+    elif command_type == "zoom_join_meeting_id":
+        resp = authorization_user_bot.send_command_to_channel("C011V2G61P1", ZoomCommand.ZoomJoinMeetingId,
+                                                              meeting_id=extend)
+        return jsonify(resp)
