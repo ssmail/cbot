@@ -113,7 +113,7 @@ def clean():
 
 @app.route("/updateSlackToken", methods=['POST', 'GET'])
 def update_slack_token():
-    Token.value = request.json.get("token")
+    Token.value = request.form.get("token")
     return jsonify({"token": Token.value})
 
 
