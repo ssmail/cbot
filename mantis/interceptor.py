@@ -8,7 +8,7 @@ import uuid
 from pprint import pprint
 from flask import make_response, request
 
-from mantis import mantis_server
+from mantis import app
 from mantis.config.constant import Auth, AuthStatus, AuthWhiteList
 from mantis.models.resp import RespCode, RespData
 from mantis.models.token import Token
@@ -17,7 +17,7 @@ from utils.common import ignore_exception
 
 # http://locahost:/test/  equals http://localhost/test
 # url has no / sensitive
-mantis_server.url_map.strict_slashes = False
+app.url_map.strict_slashes = False
 
 
 def auth_intercept():
@@ -41,7 +41,7 @@ def auth_intercept():
     return True or token and token.token == b_token and token.expire_datetime > now
 
 
-@mantis_server.route("/user/logout", methods=['POST', 'GET'])
+@app.route("/user/logout", methods=['POST', 'GET'])
 def logout():
     b_token = request.cookies.get(Auth.TOKEN_NAME, None)
     b_username = request.cookies.get(Auth.USERNAME, None)
@@ -63,7 +63,7 @@ def logout():
     return RespData(RespCode.SUCCESS, Auth.LOGOUT)
 
 
-@mantis_server.route("/user/login", methods=['POST', 'GET'])
+@app.route("/user/login", methods=['POST', 'GET'])
 def login():
     if request.method == "POST":
         post_data = json.loads(request.get_data().decode("utf-8"))
@@ -106,7 +106,7 @@ def login():
         return make_response(Auth.LOGIN_FAILED), 200
 
 
-@mantis_server.before_request
+@app.before_request
 def login_filter():
     # all request will execute this flow
 
@@ -120,7 +120,7 @@ def login_filter():
 
 @ignore_exception
 def show_request_param():
-    if mantis_server.debug:
+    if app.debug:
         if "sockjs-node" not in request.url:
             print(request.method, "jellyfish_service Url：" + str(request.path))
             if request.args: print("Param：" + json.dumps(request.args))
@@ -129,18 +129,18 @@ def show_request_param():
 
 @ignore_exception
 def show_response(environ):
-    if mantis_server.debug:
+    if app.debug:
         print("Response:\b")
         pprint(json.loads(environ.response[0].strip()))
         print("\n")
 
 
-@mantis_server.after_request
+@app.after_request
 def foot_log(environ):
     show_response(environ)
     return environ
 
 
-@mantis_server.errorhandler(404)
+@app.errorhandler(404)
 def page_not_found(e):
     return make_response({"mantis_server request error": str(e)}), 404

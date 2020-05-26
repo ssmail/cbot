@@ -3,7 +3,7 @@
 # author = Chris Hong
 
 
-from mantis import mantis_server
+from mantis import app
 
 if __name__ == '__main__':
-    mantis_server.run(port=8000, debug=True)
+    app.run(port=8000, debug=True)

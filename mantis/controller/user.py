@@ -8,7 +8,7 @@ from random import randint
 
 from flask_sqlalchemy import Pagination
 
-from mantis import mantis_server, RespData
+from mantis import app, RespData
 from mantis.common.utils import require
 from mantis.models.resp import RespCode
 from mantis.models.user import User

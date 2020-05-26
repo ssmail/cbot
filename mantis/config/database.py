@@ -25,7 +25,7 @@ DATABASE = 'flask'
 #     DATABASE
 # )
 
-file_path = os.path.abspath(os.getcwd()) + "/database.db"
+file_path = os.path.abspath(os.getcwd()) + "/db/database.db"
 
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + file_path
 SQLALCHEMY_TRACK_MODIFICATIONS = False
