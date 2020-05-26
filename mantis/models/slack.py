@@ -12,9 +12,9 @@ from sqlalchemy.orm import class_mapper
 
 class Slack(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    workspace = db.Column(db.String(64), index=True)
-    username = db.Column(db.String(64), index=True)
-    password = db.Column(db.String(64))
+    workspace = db.Column(db.String(64), index=True, nullable=False)
+    username = db.Column(db.String(64), index=True, nullable=False)
+    password = db.Column(db.String(64), nullable=False)
     token = db.Column(db.String(256))
     cookie = db.Column(db.String(256))
 
