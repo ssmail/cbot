@@ -1,5 +1,6 @@
 import json
 
+from mantis.models.slack import Slack
 from mantis.service.slackapi import AuthenticatedSlackUser, SlackMessageService, ZoomCommand
 from mantis.common.utils import build_message
 from flask import Flask, jsonify, request, Blueprint
@@ -119,20 +120,25 @@ def querySlackToken():
 
 @slack_api.route("/sendMessage", methods=['POST', 'GET'])
 def send_message():
-    slack_user = request.json.get("slackAuthUser")
+    username = request.json.get("username")
+    workspace = request.json.get("workspace")
+    channel = request.json.get("channel")
+
     extend = request.json.get("extend")
     command_type = request.json.get("command")
 
-    print(slack_user)
-    print("extend", extend)
-    print("command", command_type)
+    slack_auth_user: Slack = Slack.query.filter_by(
+        username=username,
+        workspace=workspace
+    ).first()
 
-    test_slack_user = AuthenticatedSlackUser(
-        **slack_user
-    )
+    if not slack_auth_user:
+        return jsonify({"error": "no user"})
 
-    print(test_slack_user)
-    authorization_user_bot = SlackMessageService(test_slack_user)
+    print(command_type)
+    print(slack_auth_user.serialize_all)
+
+    authorization_user_bot = SlackMessageService(slack_auth_user)
 
     if command_type == "zoom":
         resp = authorization_user_bot.send_command_to_channel("C011V2G61P1", ZoomCommand.Zoom)
@@ -147,3 +153,5 @@ def send_message():
         resp = authorization_user_bot.send_command_to_channel("C011V2G61P1", ZoomCommand.ZoomJoinMeetingId,
                                                               meeting_id=extend)
         return jsonify(resp)
+    else:
+        return jsonify({"resp": f"error command: {command_type}"})

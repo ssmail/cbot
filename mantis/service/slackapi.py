@@ -22,12 +22,15 @@ logger = logging.getLogger(__name__)
 
 
 @dataclass
-class AuthenticatedSlackUser:
+class AuthenticatedSlackUser(TypedJsonMixin):
+    id: int
     workspace: str
     username: str
     password: str
     token: str
     cookie: str
+    date_created: str
+    date_updated: str
 
 
 @dataclass

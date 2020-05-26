@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python
 # author = Chris Hong
+
 from dataclasses import dataclass
 
 import click
@@ -49,7 +50,7 @@ account_level_enable_pmi = SlackUser(
 
 
 def init_user(user):
-    resp = requests.post("https://devslackbot.zoomdev.us/api/account/add", data={
+    resp = requests.post("http://localhost:8000/account/add", data={
         "username": user.username,
         "password": user.password,
         "workspace": user.workspace,
@@ -61,5 +62,5 @@ def init_user(user):
 
 
 if __name__ == '__main__':
-    init_db()
+    # init_db()
     init_user(account_level_enable_pmi)
