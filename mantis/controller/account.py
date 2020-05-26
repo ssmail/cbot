@@ -59,7 +59,15 @@ def update():
     ).first()
 
     if not user:
-        return jsonify({"data": "not found"})
+        new_user = Slack()
+        new_user.username = username
+        new_user.password = password
+        new_user.workspace = workspace
+        new_user.cookie = cookie
+        new_user.token = token
+
+        new_user.save()
+        return jsonify({"create success": new_user.serialize_all})
     else:
         user.password = password
         user.cookie = cookie
