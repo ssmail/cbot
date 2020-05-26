@@ -123,7 +123,6 @@ def show_request_param():
     if mantis_server.debug:
         if "sockjs-node" not in request.url:
             print(request.method, "jellyfish_service Url：" + str(request.path))
-            print("cookies:", request.cookies)
             if request.args: print("Param：" + json.dumps(request.args))
             if request.form: print("Param：" + str(request.form))
 

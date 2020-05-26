@@ -46,7 +46,7 @@ handlers:
     class: logging.FileHandler
     level: INFO
     formatter: simple
-    filename: mantis.log
+    filename: app.log
 loggers:
   console:
     level: DEBUG
