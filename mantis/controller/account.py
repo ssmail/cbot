@@ -46,12 +46,11 @@ def query_by():
 @account_api.route('/update', methods=['POST', 'GET'])
 @require("username", "workspace")
 def update():
-    username = request.json.get("username")
-    workspace = request.json.get("workspace")
-    password = request.json.get("password")
-
-    cookie = request.json.get("cookie")
-    token = request.json.get("token")
+    username = request.form.get("username")
+    workspace = request.form.get("workspace")
+    password = request.form.get("password")
+    cookie = request.form.get("cookie")
+    token = request.form.get("token")
 
     user = Slack.query.filter_by(
         username=username,
@@ -80,11 +79,11 @@ def update():
 
 @account_api.route("/add", methods=['POST', 'GET'])
 def add():
-    username = request.json.get("username")
-    password = request.json.get("password")
-    workspace = request.json.get("workspace")
-    token = request.json.get("token")
-    cookie = request.json.get("cookie")
+    username = request.form.get("username")
+    password = request.form.get("password")
+    workspace = request.form.get("workspace")
+    token = request.form.get("token")
+    cookie = request.form.get("cookie")
 
     slack = Slack(
         username=username,
