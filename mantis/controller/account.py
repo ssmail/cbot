@@ -44,7 +44,6 @@ def query_by():
 
 
 @account_api.route('/update', methods=['POST', 'GET'])
-@require("username", "workspace")
 def update():
     username = request.form.get("username")
     workspace = request.form.get("workspace")
@@ -93,6 +92,8 @@ def add():
         cookie=cookie,
     )
 
-    slack.save()
-
-    return jsonify({"slack": slack.serialize_all})
+    try:
+        slack.save()
+        return jsonify({"slack": slack.serialize_all})
+    except Exception as e:
+        return jsonify({"error": e})
