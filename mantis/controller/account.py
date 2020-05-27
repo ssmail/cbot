@@ -84,15 +84,14 @@ def add():
     token = request.form.get("token")
     cookie = request.form.get("cookie")
 
-    slack = Slack(
-        username=username,
-        password=password,
-        workspace=workspace,
-        token=token,
-        cookie=cookie,
-    )
-
     try:
+        slack = Slack(
+            username=username,
+            password=password,
+            workspace=workspace,
+            token=token,
+            cookie=cookie,
+        )
         slack.save()
         return jsonify({"slack": slack.serialize_all})
     except Exception as e:
