@@ -27,18 +27,20 @@ def auth_intercept():
     if '/sockjs-node/' in request.path:
         return True
 
-    b_token = request.cookies.get('b_token', None)
-    b_username = request.cookies.get('username', None)
-
-    token = Token.query.filter_by(username=b_username).first()
-
-    now = datetime.datetime.today()
+    # b_token = request.cookies.get('b_token', None)
+    # b_username = request.cookies.get('username', None)
+    #
+    # token = Token.query.filter_by(username=b_username).first()
+    #
+    # now = datetime.datetime.today()
 
     # login will check following item
     # 1. token exist
     # 2. token correct
     # 3. token not expired
-    return True or token and token.token == b_token and token.expire_datetime > now
+    # return True or token and token.token == b_token and token.expire_datetime > now
+
+    return request.headers.get("Query-Key") == "ZytSVlBWc2swb2VGYlNXNklGR1Z1QT09"
 
 
 @app.route("/user/logout", methods=['POST', 'GET'])
