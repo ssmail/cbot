@@ -100,4 +100,4 @@ def add():
         slack.save()
         return jsonify({"slack": slack.serialize_all})
     except Exception as e:
-        return jsonify({"error": e})
+        return jsonify({"error": "add account failed"})
