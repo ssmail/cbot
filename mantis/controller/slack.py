@@ -39,7 +39,7 @@ def channel_message():
     try:
         zoom_msg = build_message(request.json, workspace)
         logging.info(f"Zoom Msgbox: {zoom_msg}")
-        if zoom_msg.botId in ZOOM_BOT_LIST:
+        if zoom_msg.botId != "":
             zoom_message.body = zoom_msg
         else:
             logging.info("this is not zoom message")
@@ -108,7 +108,6 @@ def clean():
 
 
 @slack_api.route("/sendMessage", methods=['POST', 'GET'])
-@auth()
 def send_message():
     key = request.headers.get('Query-Key')
     if key not in keys:
@@ -135,16 +134,16 @@ def send_message():
 
     authorization_user_bot = SlackMessageService(slack_auth_user)
 
-    if command_type == "zoom":
+    if command_type.lower() == "zoom":
         resp = authorization_user_bot.send_command_to_channel("C011V2G61P1", ZoomCommand.Zoom)
         return jsonify(resp)
-    elif command_type == "zoom_meeting_topic":
+    elif command_type.lower() == "zoom_meeting_topic":
         resp = authorization_user_bot.send_command_to_channel("C011V2G61P1", ZoomCommand.ZoomMeetingTopic, topic=extend)
         return jsonify(resp)
-    elif command_type == "zoom_join_me":
+    elif command_type.lower() == "zoom_join_me":
         resp = authorization_user_bot.send_command_to_channel("C011V2G61P1", ZoomCommand.ZoomJoinMe)
         return jsonify(resp)
-    elif command_type == "zoom_join_meeting_id":
+    elif command_type.lower() == "zoom_join_meeting_id":
         resp = authorization_user_bot.send_command_to_channel("C011V2G61P1", ZoomCommand.ZoomJoinMeetingId,
                                                               meeting_id=extend)
         return jsonify(resp)

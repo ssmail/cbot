@@ -56,7 +56,7 @@ def update(username, password, workspace, token, cookie):
     })
 
     if resp.status_code == 200:
-        print(f"update slack user token success: user: {username}")
+        print(f"success ==========》update slack user token : user: {username}")
 
 
 class SlackAuthService:
@@ -109,7 +109,7 @@ SERVER_ADDRESS = 'https://devslackbot.zoomdev.us/api'
 CHROME_PATH = os.getenv('CHROME_DRIVER_PATH')
 
 if __name__ == '__main__':
-    task_list_api = SERVER_ADDRESS + '/account/list'
+    task_list_api = SERVER_ADDRESS + '/account/list?auth=ZytSVlBWc2swb2VGYlNXNklGR1Z1QT09'
     all_task = []
     try:
         all_task = requests.get(task_list_api).json()['all']
@@ -117,7 +117,7 @@ if __name__ == '__main__':
         print(f'get task failed : {task_list_api}')
 
     for i in all_task:
-        print(f"task user: {i['username']}")
+        print(f"task user: {i['username']}, workspace: {i['workspace']}")
 
     for i in all_task:
         login_service = SlackAuthService()
@@ -126,7 +126,7 @@ if __name__ == '__main__':
         try:
             login_service.auth(user)
         except Exception as e:
-            print(f"update failed: {user.username}")
+            print(f"Failed xxxxxxxxxx :{user.username}")
             print(e)
         finally:
             login_service.quit()
