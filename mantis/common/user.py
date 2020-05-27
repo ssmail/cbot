@@ -28,6 +28,7 @@ class SlackWorkSpace:
     carterbot = "carterbot"
     hongweb = "hongweb"
 
+
 @dataclass
 class ZoomMessage:
     workspace: str

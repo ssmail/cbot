@@ -2,7 +2,7 @@ import json
 
 from mantis.models.slack import Slack
 from mantis.service.slackapi import AuthenticatedSlackUser, SlackMessageService, ZoomCommand
-from mantis.common.utils import build_message
+from mantis.common.utils import build_message, auth
 from flask import Flask, jsonify, request, Blueprint
 import logging
 
@@ -107,19 +107,14 @@ def clean():
     return jsonify({"message": zoom_message, "chat_message": chat_message})
 
 
-@slack_api.route("/updateSlackToken", methods=['POST', 'GET'])
-def update_slack_token():
-    Token.value = request.form.get("token")
-    return jsonify({"token": Token.value})
-
-
-@slack_api.route("/querySlackToken", methods=['POST', 'GET'])
-def querySlackToken():
-    return jsonify({"token": Token.value})
-
-
 @slack_api.route("/sendMessage", methods=['POST', 'GET'])
+@auth()
 def send_message():
+    key = request.headers.get('Query-Key')
+    if key not in keys:
+        logging.error(f"bad request: {request.remote_addr}")
+        return "bad request"
+
     username = request.json.get("username")
     workspace = request.json.get("workspace")
     channel = request.json.get("channel")

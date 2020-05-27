@@ -8,8 +8,10 @@ import functools
 from pprint import pprint
 
 import flask
-from flask import request
+from flask import request, jsonify
 from werkzeug.exceptions import BadRequest
+
+from mantis.common.user import ZoomMessage
 
 
 def require(*required_args):
@@ -102,3 +104,17 @@ def ensure_value(j, key):
         return j[key][0]
     except:
         return ""
+
+
+def auth(*args, **kwargs):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kw):
+            if request.args.get("auth") == "ZytSVlBWc2swb2VGYlNXNklGR1Z1QT09":
+                return func(*args, **kw)
+            else:
+                return flask.jsonify(code=400, message="error")
+
+        return wrapper
+
+    return decorator

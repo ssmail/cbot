@@ -3,13 +3,14 @@
 # author = Chris Hong
 from flask import jsonify, request, Blueprint
 
-from mantis.common.utils import require
+from mantis.common.utils import require, auth
 from mantis.models.slack import Slack
 
 account_api = Blueprint('account', __name__, url_prefix='/account')
 
 
 @account_api.route('/', methods=['POST', 'GET'])
+@auth()
 def index():
     return jsonify(
         {
@@ -21,6 +22,7 @@ def index():
 
 
 @account_api.route('/list', methods=['POST', 'GET'])
+@auth()
 def list_all():
     all_account = Slack.query.all()
     return jsonify({"all": [slack.serialize_all for slack in all_account]})
@@ -28,6 +30,7 @@ def list_all():
 
 @account_api.route('/query', methods=['POST', 'GET'])
 @require("username", "workspace")
+@auth()
 def query_by():
     username = request.args.get("username")
     workspace = request.args.get("workspace")
@@ -44,6 +47,7 @@ def query_by():
 
 
 @account_api.route('/update', methods=['POST', 'GET'])
+@auth()
 def update():
     username = request.form.get("username")
     workspace = request.form.get("workspace")
@@ -77,6 +81,7 @@ def update():
 
 
 @account_api.route("/add", methods=['POST', 'GET'])
+@auth()
 def add():
     username = request.form.get("username")
     password = request.form.get("password")

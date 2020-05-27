@@ -40,7 +40,7 @@ def auth_intercept():
     # 3. token not expired
     # return True or token and token.token == b_token and token.expire_datetime > now
 
-    return request.headers.get("Query-Key") == "ZytSVlBWc2swb2VGYlNXNklGR1Z1QT09"
+    return True
 
 
 @app.route("/user/logout", methods=['POST', 'GET'])
