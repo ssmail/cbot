@@ -137,13 +137,13 @@ def send_message():
     if command_type.lower() == "zoom":
         resp = slack_bot.send("C011V2G61P1", ZoomCommand.Zoom)
         return jsonify(resp)
-    elif command_type.lower() == "ZoomMeetingTopic":
+    elif command_type == "ZoomMeetingTopic":
         resp = slack_bot.send("C011V2G61P1", ZoomCommand.ZoomMeetingTopic, topic=extend)
         return jsonify(resp)
-    elif command_type.lower() == "ZoomJoinMe":
+    elif command_type == "ZoomJoinMe":
         resp = slack_bot.send("C011V2G61P1", ZoomCommand.ZoomJoinMe)
         return jsonify(resp)
-    elif command_type.lower() == "ZoomJoinMeeting":
+    elif command_type == "ZoomJoinMeeting":
         resp = slack_bot.send(
             "C011V2G61P1", ZoomCommand.ZoomJoinMeetingId,
             meeting_id=extend
