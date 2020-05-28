@@ -2,6 +2,6 @@ git checkout .
 git pull
 pkill gunicorn
 
-gunicorn server:app -b :8000 -w 1
+python3.7 server.py
 
 #nohup gunicorn -c config.py server:app &
