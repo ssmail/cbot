@@ -132,20 +132,22 @@ def send_message():
     print(command_type)
     print(slack_auth_user.serialize_all)
 
-    authorization_user_bot = SlackMessageService(slack_auth_user)
+    slack_bot = SlackMessageService(slack_auth_user)
 
     if command_type.lower() == "zoom":
-        resp = authorization_user_bot.send_command_to_channel("C011V2G61P1", ZoomCommand.Zoom)
+        resp = slack_bot.send("C011V2G61P1", ZoomCommand.Zoom)
         return jsonify(resp)
-    elif command_type.lower() == "zoom_meeting_topic":
-        resp = authorization_user_bot.send_command_to_channel("C011V2G61P1", ZoomCommand.ZoomMeetingTopic, topic=extend)
+    elif command_type.lower() == "ZoomMeetingTopic":
+        resp = slack_bot.send("C011V2G61P1", ZoomCommand.ZoomMeetingTopic, topic=extend)
         return jsonify(resp)
-    elif command_type.lower() == "zoom_join_me":
-        resp = authorization_user_bot.send_command_to_channel("C011V2G61P1", ZoomCommand.ZoomJoinMe)
+    elif command_type.lower() == "ZoomJoinMe":
+        resp = slack_bot.send("C011V2G61P1", ZoomCommand.ZoomJoinMe)
         return jsonify(resp)
-    elif command_type.lower() == "zoom_join_meeting_id":
-        resp = authorization_user_bot.send_command_to_channel("C011V2G61P1", ZoomCommand.ZoomJoinMeetingId,
-                                                              meeting_id=extend)
+    elif command_type.lower() == "ZoomJoinMeeting":
+        resp = slack_bot.send(
+            "C011V2G61P1", ZoomCommand.ZoomJoinMeetingId,
+            meeting_id=extend
+        )
         return jsonify(resp)
     else:
         return jsonify({"resp": f"error command: {command_type}"})

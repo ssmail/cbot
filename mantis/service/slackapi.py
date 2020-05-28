@@ -75,7 +75,7 @@ class SlackMessageService:
         self.workspace_api = f'https://{self.workspace}.slack.com/api/chat.command'
         self.session = requests.session()
 
-    def send_command_to_channel(self, channel_id, command: ZoomCommand, **kwargs):
+    def send(self, channel_id, command: ZoomCommand, **kwargs):
         data = ""
         if command == ZoomCommand.Zoom:
             data = self.__command_zoom(channel_id)
@@ -179,7 +179,7 @@ class SlackMessageService:
 
     def send_message(self, channel_id, command: ZoomCommand, **kwargs) -> ZoomMessage:
         self.clean_channel_zoom_message()
-        self.send_command_to_channel(channel_id=channel_id, command=command, **kwargs)
+        self.send(channel_id=channel_id, command=command, **kwargs)
         time.sleep(5)
         return self.fetch_channel_zoom_message()
 
@@ -198,5 +198,5 @@ if __name__ == '__main__':
 
     # /zoom
     # send message to channel [allmember]
-    zoom_message_1 = authorization_user_bot.send_command_to_channel("C011V2G61P1", ZoomCommand.Zoom)
+    zoom_message_1 = authorization_user_bot.send("C011V2G61P1", ZoomCommand.Zoom)
     print(zoom_message_1)
