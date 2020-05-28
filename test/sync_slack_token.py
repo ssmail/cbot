@@ -14,6 +14,7 @@ requirements:
 
 """
 import os
+import sys
 import re
 import urllib3
 import requests
@@ -106,7 +107,8 @@ class SlackAuthService:
 SERVER_ADDRESS = 'https://devslackbot.zoomdev.us/api'
 
 # CHROME_PATH = 'C:\\Users\\admin\\jenkins\\workspace\\slack_token_sync\\chromedriver.exe'
-CHROME_PATH = os.getenv('CHROME_DRIVER_PATH')
+CHROME_PATH = sys.argv[1]
+print(CHROME_PATH)
 
 if __name__ == '__main__':
     task_list_api = SERVER_ADDRESS + '/account/list?auth=ZytSVlBWc2swb2VGYlNXNklGR1Z1QT09'
