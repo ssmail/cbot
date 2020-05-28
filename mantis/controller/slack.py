@@ -104,7 +104,7 @@ def clean():
     zoom_message.body = None
     chat_message.clear()
 
-    return jsonify({"message": zoom_message, "chat_message": chat_message})
+    return jsonify({"zoomMessage": zoom_message.body})
 
 
 @slack_api.route("/sendMessage", methods=['POST', 'GET'])
