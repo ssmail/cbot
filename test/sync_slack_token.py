@@ -107,7 +107,7 @@ class SlackAuthService:
 SERVER_ADDRESS = 'https://devslackbot.zoomdev.us/api'
 
 # CHROME_PATH = 'C:\\Users\\admin\\jenkins\\workspace\\slack_token_sync\\chromedriver.exe'
-CHROME_PATH = sys.argv[1]
+CHROME_PATH = sys.argv[2]
 print(CHROME_PATH)
 
 if __name__ == '__main__':
