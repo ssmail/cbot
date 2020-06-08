@@ -31,14 +31,14 @@ class CustomJSONEncoder(JSONEncoder):
         return JSONEncoder.default(self, obj)
 
 
-class JSONResponse(Response):
-    default_mimetype = 'application/json'
-
-    @classmethod
-    def force_type(cls, response, environ=None):
-        if isinstance(response, dict):
-            response = jsonify(response)
-            return super(JSONResponse, cls).force_type(response, environ)
+# class JSONResponse(Response):
+#     default_mimetype = 'application/json'
+#
+#     @classmethod
+#     def force_type(cls, response, environ=None):
+#         if isinstance(response, dict):
+#             response = jsonify(response)
+#             return super(JSONResponse, cls).force_type(response, environ)
 
 
 app = Flask("mantis")
@@ -61,7 +61,7 @@ app.config['CELERY_RESULT_BACKEND'] = 'redis://{}:6379/0'.format(redis_server)
 app.json_encoder = CustomJSONEncoder
 
 # auto format Dict to jsonify
-app.response_class = JSONResponse
+# app.response_class = JSONResponse
 
 # init task
 
@@ -78,9 +78,11 @@ from mantis import interceptor
 # from mantis.controller.user import user_api
 from mantis.controller.account import account_api
 from mantis.controller.slack import slack_api
+from mantis.controller.jira import jira_api
 
 # app.register_blueprint(test_api)
 # app.register_blueprint(user_api)
 app.register_blueprint(account_api)
 app.register_blueprint(slack_api)
+app.register_blueprint(jira_api)
 app.debug = True

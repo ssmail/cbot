@@ -137,10 +137,10 @@ def show_response(environ):
         print("\n")
 
 
-@app.after_request
-def foot_log(environ):
-    show_response(environ)
-    return environ
+# @app.after_request
+# def foot_log(environ):
+#     show_response(environ)
+#     return environ
 
 
 @app.errorhandler(404)
