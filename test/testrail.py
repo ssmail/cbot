@@ -4,8 +4,6 @@
 
 from testrail_api import TestRailAPI
 
-# api = TestRailAPI("https://zoomus.testrail.io/", "carter.hong@zoom.us", "Zoom.156233")
-
 # def add_milestore():
 #     new_milestone = api.milestones.add_milestone(
 #         project_id=2,
@@ -39,10 +37,6 @@ from testrail_api import TestRailAPI
 #         print(i)
 #         break
 
-# cases = api.cases.get_cases(2, section_id=7682782)
-
-# for i in cases:
-#     print(i['id'])
 
 # for i in suites.items():
 #     print(i)
@@ -58,3 +52,31 @@ from testrail_api import TestRailAPI
 #
 # for i in my_test_run.items():
 #     print(i)
+
+if __name__ == '__main__':
+    api = TestRailAPI("https://zoomus.testrail.io/", "carter.hong@zoom.us", "Zoom.156233")
+
+    # cases = api.cases.get_cases(2, section_id=99041016)
+    # cases = api.cases.get_cases(2, section_id=56778576)
+
+    # case = api.cases.get_case(56778576)
+    # print(case)
+    # result = api.results.get_results(99041016)
+    # print(result)
+
+    # for i in cases:
+    #     print(i['id'])
+
+    # case = api.cases.get_cases(2, section_id=7678186)
+    # print(case)
+
+    # https://zoomus.testrail.io/index.php?/tests/view/99041016
+
+    # https://zoomus.testrail.io/index.php?/cases/view/56778576
+
+    # https://zoomus.testrail.io/index.php?/suites/view/11&group_by=cases:section_id&group_id=7678369&group_order=asc
+
+    # a = api.cases.get_cases(9, suite_id=11, section_id=7678369)
+    # for i in a:
+    #     print(a)
+    print(api.suites.get_suite(11)['project_id'])

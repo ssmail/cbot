@@ -6,8 +6,8 @@ import logging.config
 from datetime import date
 
 import yaml
-from flask import Flask
-from flask.json import JSONEncoder
+from flask import Flask, Response
+from flask.json import JSONEncoder, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 from mantis.config.constant import LogConfig
@@ -29,14 +29,14 @@ class CustomJSONEncoder(JSONEncoder):
         return JSONEncoder.default(self, obj)
 
 
-# class JSONResponse(Response):
-#     default_mimetype = 'application/json'
-#
-#     @classmethod
-#     def force_type(cls, response, environ=None):
-#         if isinstance(response, dict):
-#             response = jsonify(response)
-#             return super(JSONResponse, cls).force_type(response, environ)
+class JSONResponse(Response):
+    default_mimetype = 'application/json'
+
+    @classmethod
+    def force_type(cls, response, environ=None):
+        if isinstance(response, dict):
+            response = jsonify(response)
+            return super(JSONResponse, cls).force_type(response, environ)
 
 
 app = Flask("mantis")
@@ -67,7 +67,8 @@ app.json_encoder = CustomJSONEncoder
 db = SQLAlchemy(app)
 
 logging.config.dictConfig(yaml.load(LogConfig.LogCfg, Loader=yaml.FullLoader))
-
+logging.getLogger("testrail_api").setLevel(logging.WARNING)
+logging.getLogger("urllib3.connectionpool").setLevel(logging.WARNING)
 # base server api
 from mantis import interceptor
 

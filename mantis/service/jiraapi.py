@@ -17,11 +17,11 @@ class JiraService:
     def query_issues(self, fix_version):
         url = "https://zoomvideo.atlassian.net/rest/api/3/search"
 
-        jql = f'project = ZOOM AND fixVersion = "{fix_version}" ORDER BY priority DESC'
+        jql = f'project = "ZOOM" AND fixVersion = "{fix_version}"'
 
-        query = {
-            'jql': jql
-        }
+        query = {'jql': jql, "maxResults": "200"}
+
+        print(jql)
 
         response = requests.request(
             "GET",
@@ -30,7 +30,9 @@ class JiraService:
             params=query,
             auth=self.auth
         )
+
         issues = response.json()
+        print("---> ", issues['total'])
         return issues['issues']
 
     def query_project(self, text):
@@ -38,11 +40,11 @@ class JiraService:
 
         params = (
             ('expand', 'issuesstatus'),
-            ('maxResults', '25'),
+            ('maxResults', '100'),
             ('orderBy', '-sequence'),
             ('query', text),
             ('startAt', '0'),
-            ('status', 'unreleased'),
+            # ('status', 'unreleased'),
         )
 
         response = requests.request(

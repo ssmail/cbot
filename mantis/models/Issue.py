@@ -15,8 +15,11 @@ class Issue(db.Model):
     status = db.Column(db.String(64), nullable=False)
     summary = db.Column(db.String(64), nullable=False)
     properties = db.Column(db.String(64), nullable=False)
-    testrail = db.Column(db.String(64), nullable=False)
+    testrail = db.Column(db.String(256))
     link = db.Column(db.String(64), nullable=False)
+    case_id = db.Column(db.String(32))
+    testrail_project_id = db.Column(db.String(32))
+
     date_created = db.Column(
         db.DateTime,
         default=datetime.datetime.now
@@ -40,6 +43,3 @@ class Issue(db.Model):
     def serialize_all(self):
         columns = [c.key for c in class_mapper(self.__class__).columns]
         return dict((c, getattr(self, c)) for c in columns)
-
-    def __repr__(self):
-        return '[ep_name:{}]'.format(self.ep_name)
