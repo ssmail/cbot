@@ -66,7 +66,7 @@ def logout():
     return RespData(RespCode.SUCCESS, Auth.LOGOUT)
 
 
-@app.route("/qa/user/login", methods=['POST', 'GET'])
+@app.route("/user/login", methods=['POST', 'GET'])
 def login():
     if request.method == "POST":
         username = request.form.get("username", None)
@@ -75,8 +75,6 @@ def login():
         username = request.args.get("username", None)
         password = request.args.get("password", None)
 
-
-    print(username, password)
     if not (username and password):
         return make_response(Auth.LOGIN_PARAM_ERROR), AuthStatus.Forbidden
 
