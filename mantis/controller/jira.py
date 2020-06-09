@@ -27,7 +27,6 @@ headers = {
 }
 
 jira_service = JiraService()
-
 testrail = TestRailService()
 
 

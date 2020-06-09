@@ -74,13 +74,13 @@ from mantis import interceptor
 
 # other api
 # from mantis.controller.api import test_api
-# from mantis.controller.user import user_api
+from mantis.controller.user import user_api
 from mantis.controller.account import account_api
 from mantis.controller.slack import slack_api
 from mantis.controller.jira import jira_api
 
 # app.register_blueprint(test_api)
-# app.register_blueprint(user_api)
+app.register_blueprint(user_api)
 app.register_blueprint(account_api)
 app.register_blueprint(slack_api)
 app.register_blueprint(jira_api)

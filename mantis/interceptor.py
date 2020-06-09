@@ -44,7 +44,7 @@ def auth_intercept():
     return True
 
 
-@app.route("/user/logout", methods=['POST', 'GET'])
+@app.route("/qa/user/logout", methods=['POST', 'GET'])
 def logout():
     b_token = request.cookies.get(Auth.TOKEN_NAME, None)
     b_username = request.cookies.get(Auth.USERNAME, None)
@@ -66,16 +66,17 @@ def logout():
     return RespData(RespCode.SUCCESS, Auth.LOGOUT)
 
 
-@app.route("/user/login", methods=['POST', 'GET'])
+@app.route("/qa/user/login", methods=['POST', 'GET'])
 def login():
     if request.method == "POST":
-        post_data = json.loads(request.get_data().decode("utf-8"))
-        username = post_data.get("username", None)
-        password = post_data.get("password", None)
+        username = request.form.get("username", None)
+        password = request.form.get("password", None)
     else:
         username = request.args.get("username", None)
         password = request.args.get("password", None)
 
+
+    print(username, password)
     if not (username and password):
         return make_response(Auth.LOGIN_PARAM_ERROR), AuthStatus.Forbidden
 

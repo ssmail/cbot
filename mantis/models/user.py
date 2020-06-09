@@ -23,8 +23,7 @@ class Serializer(object):
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(64), index=True, unique=True)
-    email = db.Column(db.String(120), index=True, unique=False)
-    password = db.Column(db.String(128), nullable=False, default="123456")
+    password = db.Column(db.String(128), nullable=False)
 
     date_created = db.Column(
         db.DateTime,
@@ -58,13 +57,3 @@ class User(db.Model):
     def save(self):
         db.session.add(self)
         db.session.commit()
-
-    def valid(self):
-
-        if len(self.username) < 4:
-            return False
-
-        if '@' not in self.email:
-            return False
-
-        return True

@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python
 # author = Chris Hong
-import datetime
-import uuid
-from flask import jsonify, request, Blueprint
 from random import randint
 
+from flask import jsonify, request, Blueprint
 from flask_sqlalchemy import Pagination
 
-from mantis import app, RespData
-from mantis.common.utils import require
+from mantis import RespData
 from mantis.models.resp import RespCode
 from mantis.models.user import User
 from utils.common import pager
@@ -54,27 +51,20 @@ def query_by():
     return RespData(RespCode.SUCCESS, data)
 
 
-@user_api.route("/add")
-@require("username", "email")
+@user_api.route("/add", methods=['POST', 'GET'])
 def add():
-    # username = request.args.get("username")
-    username = "username_{}".format(randint(100000, 10000000))
+    username = request.json.get("username")
+    password = request.json.get("password")
 
-    # email = request.args.get("email")
-    email = "email@qq.com"
-
-    # q_user = User.query.filter_by(username=username).first()
-    # if q_user: return jsonify({success: False, "message": "user has exist"})
+    print(request.form)
 
     user = User(
         username=username,
-        email=email
+        password=password
     )
 
-    if user.valid():
-        user.save()
-        data = {"user": user.serialize_all}
-        return RespData(RespCode.SUCCESS, {"data": data}, message="create user successfully")
-    else:
-        data = {"reason": "user model invalid"}
-        return RespData(RespCode.FAILED, data, message="create user failed")
+    print(user)
+
+    user.save()
+    data = {"user": user.serialize_all}
+    return RespData(RespCode.SUCCESS, {"data": data}, message="create user successfully")
