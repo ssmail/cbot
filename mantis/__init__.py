@@ -2,15 +2,13 @@
 # !/usr/bin/env python
 # author = Chris Hong
 
-import logging, logging.config, yaml
+import logging.config
 from datetime import date
 
 import yaml
-
-from flask import Flask, Response
-from flask.json import JSONEncoder, jsonify
+from flask import Flask
+from flask.json import JSONEncoder
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.ext.declarative import declarative_base
 
 from mantis.config.constant import LogConfig
 from mantis.config.database import SQLALCHEMY_DATABASE_URI
@@ -86,3 +84,4 @@ app.register_blueprint(account_api)
 app.register_blueprint(slack_api)
 app.register_blueprint(jira_api)
 app.debug = True
+app.config['CORS_HEADERS'] = 'Content-Type'

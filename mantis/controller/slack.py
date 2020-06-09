@@ -1,10 +1,10 @@
-import json
-
-from mantis.models.slack import Slack
-from mantis.service.slackapi import AuthenticatedSlackUser, SlackMessageService, ZoomCommand
-from mantis.common.utils import build_message, auth
-from flask import Flask, jsonify, request, Blueprint
 import logging
+
+from flask import jsonify, request, Blueprint
+
+from mantis.common.utils import build_message
+from mantis.models.slack import Slack
+from mantis.service.slackapi import SlackMessageService, ZoomCommand
 
 slack_api = Blueprint('slack', __name__, url_prefix='/slack')
 
@@ -78,10 +78,15 @@ def command():
 @slack_api.route("/query", methods=['GET', 'POST'])
 def query():
     key = request.headers.get('Query-Key')
+    query_key = request.args.get("auth")
     msg_type = request.args.get("type", "zoom")
     logging.info(f"key: {key}, keys:{keys}")
 
-    if key not in keys:
+    if not query_key:
+        if key not in keys:
+            logging.error(f"bad request: {request.remote_addr}")
+            return "bad request"
+    elif query_key != "ZytSVlBWc2swb2VGYlNXNklGR1Z1QT09":
         logging.error(f"bad request: {request.remote_addr}")
         return "bad request"
 

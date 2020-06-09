@@ -38,9 +38,6 @@ class Milestone(TypedJsonMixin):
     milestones: List[str]
 
 
-api = TestRailAPI("https://zoomus.testrail.io/", "carter.hong@zoom.us", "Zoom.156233")
-
-
 class TestRailService:
 
     @staticmethod
@@ -66,6 +63,9 @@ class TestRailService:
     def add_test_run():
         pass
 
+
 if __name__ == '__main__':
+    api = TestRailAPI("https://zoomus.testrail.io/", "carter.hong@zoom.us", "Zoom.156233")
+
     s = TestRailService()
     s.add_sub_milestone(2, "add_by_s_2", 123)

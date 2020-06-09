@@ -158,12 +158,40 @@ def ep():
     )
 
 
-@jira_api.route("/ep/get_post_param", methods=["POST", 'GET'])
-def get_post_param():
+@jira_api.route("/ep/milestone", methods=['POST'])
+def create():
     return jsonify(
         {
             "args": request.args,
             "json": request.json,
-            "form": request.form,
+            "form": request.form
         }
     )
+    #
+    # if not ep_name:
+    #     return jsonify({"error": "fix_version params should not be null"})
+    #
+    # projects = jira_service.query_project(ep_name)
+    #
+    # project_list = []
+    #
+    # for project in projects:
+    #     project = EP(
+    #         id=project['id'],
+    #         description=get_path(project, ['description']),
+    #         name=get_path(project, ["name"]),
+    #         released=get_path(project, ['released']),
+    #         releaseDate=get_path(project, ['releaseDate']),
+    #         link='https://zoomvideo.atlassian.net/projects/ZOOM/versions/{}/tab/release-report-all-issues'.format(
+    #             project['id'])
+    #     )
+    #     project_list.append(project)
+    #
+    # return jsonify(
+    #     {
+    #         "total": len(project_list),
+    #         "fixVersions": project_list,
+    #         "info": projects,
+    #         "code": 20000
+    #     }
+    # )

@@ -4,7 +4,7 @@
 
 from testrail_api import TestRailAPI
 
-api = TestRailAPI("https://zoomus.testrail.io/", "carter.hong@zoom.us", "Zoom.156233")
+# api = TestRailAPI("https://zoomus.testrail.io/", "carter.hong@zoom.us", "Zoom.156233")
 
 # def add_milestore():
 #     new_milestone = api.milestones.add_milestone(
@@ -39,22 +39,22 @@ api = TestRailAPI("https://zoomus.testrail.io/", "carter.hong@zoom.us", "Zoom.15
 #         print(i)
 #         break
 
-cases = api.cases.get_cases(2, section_id=7682782)
+# cases = api.cases.get_cases(2, section_id=7682782)
 
-for i in cases:
-    print(i['id'])
+# for i in cases:
+#     print(i['id'])
 
 # for i in suites.items():
 #     print(i)
 
 
-my_test_run = api.runs.add_run(
-    project_id=2,
-    name="My test run",
-    milestone_id=1742,
-    include_all=False,
-    case_ids=['56782955', '56782956', '56782957']
-)
-
-for i in my_test_run.items():
-    print(i)
+# my_test_run = api.runs.add_run(
+#     project_id=2,
+#     name="My test run",
+#     milestone_id=1742,
+#     include_all=False,
+#     case_ids=['56782955', '56782956', '56782957']
+# )
+#
+# for i in my_test_run.items():
+#     print(i)

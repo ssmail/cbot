@@ -6,6 +6,7 @@ import datetime
 import json
 import uuid
 from pprint import pprint
+
 from flask import make_response, request
 
 from mantis import app
@@ -113,20 +114,20 @@ def login_filter():
     # all request will execute this flow
 
     # debug request basic info
-    show_request_param()
+    # show_request_param()
 
     # login check
     if not auth_intercept():
         return make_response(Auth.AUTH_FAILED), AuthStatus.Forbidden
 
 
-@ignore_exception
-def show_request_param():
-    if app.debug:
-        if "sockjs-node" not in request.url:
-            print(request.method, "jellyfish_service Url：" + str(request.path))
-            if request.args: print("Param：" + json.dumps(request.args))
-            if request.form: print("Param：" + str(request.form))
+# @ignore_exception
+# def show_request_param():
+#     if app.debug:
+#         if "sockjs-node" not in request.url:
+#             print(request.method, "jellyfish_service Url：" + str(request.path))
+#             if request.args: print("Param：" + json.dumps(request.args))
+#             if request.form: print("Param：" + str(request.form))
 
 
 @ignore_exception
@@ -137,10 +138,10 @@ def show_response(environ):
         print("\n")
 
 
-# @app.after_request
-# def foot_log(environ):
-#     show_response(environ)
-#     return environ
+@app.after_request
+def foot_log(environ):
+    show_response(environ)
+    return environ
 
 
 @app.errorhandler(404)
