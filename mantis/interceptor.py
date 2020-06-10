@@ -114,7 +114,7 @@ def login_filter():
     # all request will execute this flow
 
     # debug request basic info
-    show_request_param()
+    # show_request_param()
 
     # login check
     if not auth_intercept():
