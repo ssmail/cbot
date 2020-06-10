@@ -7,6 +7,7 @@ from flask import jsonify, request, Blueprint
 from flask_sqlalchemy import Pagination
 
 from mantis import RespData
+from mantis.common.utils import auth
 from mantis.models.resp import RespCode
 from mantis.models.user import User
 from utils.common import pager
@@ -15,10 +16,9 @@ user_api = Blueprint('user', __name__, url_prefix='/user')
 
 
 @user_api.route('/')
+@auth()
 def index():
-    current_user = request.cookies.get("username", None)
-    User.query.list_all()
-    return jsonify({"result": User.query.list_all()})
+    return jsonify({"result": [u.serialize_all for u in User.query.all()]})
 
 
 @user_api.route('/query')
@@ -52,19 +52,7 @@ def query_by():
 
 
 @user_api.route("/add", methods=['POST', 'GET'])
+@auth()
 def add():
-    username = request.json.get("username")
-    password = request.json.get("password")
-
-    print(request.form)
-
-    user = User(
-        username=username,
-        password=password
-    )
-
-    print(user)
-
-    user.save()
-    data = {"user": user.serialize_all}
-    return RespData(RespCode.SUCCESS, {"data": data}, message="create user successfully")
+    user = User(username=request.json.get("username"), password=request.json.get("password")).save()
+    return RespData(RespCode.SUCCESS, {"data": {"user": user.serialize_all}}, message="create user successfully")

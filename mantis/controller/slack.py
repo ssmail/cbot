@@ -119,8 +119,8 @@ def send_message():
         logging.error(f"bad request: {request.remote_addr}")
         return "bad request"
 
-    username = request.json.get("username")
-    workspace = request.json.get("workspace")
+    username = request.json.get("slackUser")['username']
+    workspace = request.json.get("slackUser")['workspace']
     channel = request.json.get("channel")
 
     extend = request.json.get("extend")

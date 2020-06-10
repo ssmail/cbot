@@ -9,10 +9,10 @@ class Auth:
     TOKEN_NAME = "b_token"
     USERNAME = "username"
     LOGOUT = {"success": True, "message": "logout success"}
-    AUTH_FAILED = {"AUTH FAILED": "Login Check Failed"}
-    LOGIN_PARAM_ERROR = {"AUTH FAILED": "Login Params error"}
-    LOGIN_FAILED = {"code": 403, "message": "Login Failed"}
-    AUTH_SUCCESS = {"code": 200, "data": {"token": "admin-token"}}
+    AUTH_FAILED = {"code": 403, "message": "User Auth Check Failed"}
+    LOGIN_PARAM_ERROR = {"code": 403, "message": "User Auth  Params error"}
+    LOGIN_FAILED = {"code": 403, "message": "User Auth check failed"}
+    AUTH_SUCCESS = {"code": 200, "data": {"token": "admin-token"}, "message": "auth success"}
 
 
 class AuthStatus:

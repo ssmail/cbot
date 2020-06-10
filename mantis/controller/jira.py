@@ -1,33 +1,18 @@
 import re
 from dataclasses import dataclass
 
-import requests
-import urllib3
 from flask import Blueprint, jsonify, request
-from requests.auth import HTTPBasicAuth
 from testrail_api import TestRailAPI
 
-from mantis.config.testrail import TestrailProjectMapping
+from mantis.config.testrail import TestrailProjectMapping, TestRailAccount
 from mantis.models.Issue import Issue
 from mantis.service.jiraapi import JiraService
-from mantis.service.testrail import TestRailService
-
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 jira_api = Blueprint('jira', __name__, url_prefix='/qa/')
-api = TestRailAPI("https://zoomus.testrail.io/", "carter.hong@zoom.us", "Zoom.156233")
 
-url = "https://zoomvideo.atlassian.net/rest/api/3/search"
-
-auth = HTTPBasicAuth("carter.hong@zoom.us", "5oRaeHI6F1zsswr4Aril1CCD")
-s = requests.session()
-
-headers = {
-    "Accept": "application/json"
-}
+api = TestRailAPI(TestRailAccount.server, TestRailAccount.username, TestRailAccount.password)
 
 jira_service = JiraService()
-testrail = TestRailService()
 
 
 def build_query(fix_version: str, max_results: int):

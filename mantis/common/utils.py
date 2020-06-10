@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python3
 # author = CarterHong
-import re
-from dataclasses import dataclass
-
 import functools
-from pprint import pprint
+import re
 
 import flask
-from flask import request, jsonify
+from flask import request
 from werkzeug.exceptions import BadRequest
 
 from mantis.common.user import ZoomMessage
@@ -113,7 +110,7 @@ def auth(*args, **kwargs):
             if request.args.get("auth") == "ZytSVlBWc2swb2VGYlNXNklGR1Z1QT09":
                 return func(*args, **kw)
             else:
-                return flask.jsonify(code=400, message="error")
+                return flask.jsonify(code=400, message="auth error")
 
         return wrapper
 

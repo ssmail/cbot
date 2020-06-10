@@ -72,7 +72,7 @@ class SlackAuthService:
     def auth(self, slackUser):
         self.driver.get(f'https://{slackUser.workspace}.slack.com/#/')
         self.driver.find_element_by_id("email").send_keys(slackUser.username)
-        self.driver.find_element_by_id("password").send_keys(slackUser.password)
+        self.driver.find_element_by_id("password").send_keys(slackUser.token)
         self.driver.find_element_by_id("signin_btn").click()
 
         self.driver.get(f'view-source:{self._get_token_url}')
@@ -86,7 +86,7 @@ class SlackAuthService:
 
         update(
             username=slackUser.username,
-            password=slackUser.password,
+            password=slackUser.token,
             workspace=slackUser.workspace,
             token=token,
             cookie=cookie

@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python3
 # author = CarterHong
-import json
 
 import requests
 from requests.auth import HTTPBasicAuth
 
+from mantis.config.testrail import JiraAccount
+
 
 class JiraService:
-    auth = HTTPBasicAuth("carter.hong@zoom.us", "5oRaeHI6F1zsswr4Aril1CCD")
+    auth = HTTPBasicAuth(JiraAccount.username, JiraAccount.token)
 
     headers = {
         "Accept": "application/json"
@@ -60,11 +61,3 @@ class JiraService:
 
         for issue in issues:
             print(issue)
-
-
-# jira = JiraService()
-# jira.query_issues("Web-EP-20200607 For US04")
-# jira.query_project('0607')
-
-resp = requests.post('http://localhost:8000/qa/ep/milestone', json={"a": "b"}).text
-print(resp)

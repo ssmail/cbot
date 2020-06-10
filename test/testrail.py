@@ -4,44 +4,6 @@
 
 from testrail_api import TestRailAPI
 
-# def add_milestore():
-#     new_milestone = api.milestones.add_milestone(
-#         project_id=2,
-#         name="AutoCreateByCarterApiadds",
-#         start_on=int(datetime.now().timestamp()),
-#         parent_id=1741
-#     )
-#
-
-# add_milestore()
-
-# m = api.milestones.get_milestone(1743)
-
-# my_test_run = api.runs.add_run(
-#     project_id=2,
-#     suite_id=2,
-#     name="My test run",
-#     include_all=True,
-#     milestone_id=m["id"]
-# )
-
-# user = api.users.get_user_by_email("Lemon.Wu@zoom.us")
-#
-# print(user)
-
-
-# sections = api.sections.get_sections(31)
-#
-# for i in sections:
-#     if i['name'] == 'IntegrationService-EP-20200607':
-#         print(i)
-#         break
-
-
-# for i in suites.items():
-#     print(i)
-
-
 # my_test_run = api.runs.add_run(
 #     project_id=2,
 #     name="My test run",
@@ -52,9 +14,39 @@ from testrail_api import TestRailAPI
 #
 # for i in my_test_run.items():
 #     print(i)
+from mantis.config.testrail import TestRailAccount
+
+# def add_milestore():
+#     new_milestone = api.milestones.add_milestone(
+#         project_id=2,
+#         name="AutoCreateByCarterApiadds",
+#         start_on=int(datetime.now().timestamp()),
+#         parent_id=1741
+#     )
+#
+# add_milestore()
+# m = api.milestones.get_milestone(1743)
+# my_test_run = api.runs.add_run(
+#     project_id=2,
+#     suite_id=2,
+#     name="My test run",
+#     include_all=True,
+#     milestone_id=m["id"]
+# )
+# user = api.users.get_user_by_email("Lemon.Wu@zoom.us")
+#
+# print(user)
+# sections = api.sections.get_sections(31)
+#
+# for i in sections:
+#     if i['name'] == 'IntegrationService-EP-20200607':
+#         print(i)
+#         break
+# for i in suites.items():
+#     print(i)
 
 if __name__ == '__main__':
-    api = TestRailAPI("https://zoomus.testrail.io/", "carter.hong@zoom.us", "Zoom.156233")
+    api = TestRailAPI("https://zoomus.testrail.io/", TestRailAccount.username, TestRailAccount.password)
 
     # cases = api.cases.get_cases(2, section_id=99041016)
     # cases = api.cases.get_cases(2, section_id=56778576)

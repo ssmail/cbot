@@ -8,6 +8,8 @@ from typing import List
 from testrail_api import TestRailAPI
 from typed_json_dataclass import TypedJsonMixin
 
+from mantis.config.testrail import TestRailAccount
+
 
 @dataclass
 class Project(TypedJsonMixin):
@@ -65,7 +67,7 @@ class TestRailService:
 
 
 if __name__ == '__main__':
-    api = TestRailAPI("https://zoomus.testrail.io/", "carter.hong@zoom.us", "Zoom.156233")
+    api = TestRailAPI(TestRailAccount.server, TestRailAccount.username, TestRailAccount.password)
 
-    s = TestRailService()
-    s.add_sub_milestone(2, "add_by_s_2", 123)
+    # s = TestRailService()
+    # s.add_sub_milestone(2, "add_by_s_2", 123)

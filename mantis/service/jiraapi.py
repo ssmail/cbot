@@ -6,9 +6,11 @@
 import requests
 from requests.auth import HTTPBasicAuth
 
+from mantis.config.testrail import JiraAccount
+
 
 class JiraService:
-    auth = HTTPBasicAuth("carter.hong@zoom.us", "5oRaeHI6F1zsswr4Aril1CCD")
+    auth = HTTPBasicAuth(JiraAccount.username, JiraAccount.token)
 
     headers = {
         "Accept": "application/json"
@@ -20,8 +22,6 @@ class JiraService:
         jql = f'project = "ZOOM" AND fixVersion = "{fix_version}"'
 
         query = {'jql': jql, "maxResults": "200"}
-
-        print(jql)
 
         response = requests.request(
             "GET",

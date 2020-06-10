@@ -9,8 +9,8 @@ import os
 DEBUG = True
 DIALECT = 'mysql'
 DRIVER = 'pymysql'
-USERNAME = 'remote'
-PASSWORD = 'WDremote.123456'
+USERNAME = ''
+PASSWORD = ''
 HOST = '10.37.34.3'
 PORT = 3306
 DATABASE = 'flask'

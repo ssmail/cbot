@@ -7,6 +7,7 @@ import json
 import uuid
 from pprint import pprint
 
+import urllib3
 from flask import make_response, request
 
 from mantis import app
@@ -15,6 +16,8 @@ from mantis.models.resp import RespCode, RespData
 from mantis.models.token import Token
 from mantis.models.user import User
 from utils.common import ignore_exception
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # http://locahost:/test/  equals http://localhost/test
 # url has no / sensitive
@@ -28,23 +31,21 @@ def auth_intercept():
     if '/sockjs-node/' in request.path:
         return True
 
-    # b_token = request.cookies.get('b_token', None)
-    # b_username = request.cookies.get('username', None)
-    #
-    # token = Token.query.filter_by(username=b_username).first()
-    #
-    # now = datetime.datetime.today()
+    b_token = request.cookies.get('b_token', None)
+    b_username = request.cookies.get('username', None)
+
+    token = Token.query.filter_by(username=b_username).first()
+
+    now = datetime.datetime.today()
 
     # login will check following item
     # 1. token exist
     # 2. token correct
     # 3. token not expired
-    # return True or token and token.token == b_token and token.expire_datetime > now
-
-    return True
+    return token and token.token == b_token and token.expire_datetime > now
 
 
-@app.route("/qa/user/logout", methods=['POST', 'GET'])
+@app.route("/user/logout", methods=['POST', 'GET'])
 def logout():
     b_token = request.cookies.get(Auth.TOKEN_NAME, None)
     b_username = request.cookies.get(Auth.USERNAME, None)
@@ -117,14 +118,15 @@ def login_filter():
 
     # login check
     if not auth_intercept():
-        return make_response(Auth.AUTH_FAILED), AuthStatus.Forbidden
+        return make_response(Auth.AUTH_FAILED), 200
 
 
 @ignore_exception
 def show_request_param():
     if app.debug:
         if "sockjs-node" not in request.url:
-            print(request.method, "jellyfish_service Url：" + str(request.path))
+            print(request.method, "user:",
+                  request.cookies.get(Auth.USERNAME, None) + ", jellyfish_service Url：" + str(request.path))
             if request.args: print("Param：" + json.dumps(request.args))
             if request.form: print("Param：" + str(request.form))
 
