@@ -26,7 +26,11 @@ class AuthWhiteList:
         "/user/add",
         "/test_serialize",
         "/test_mem_cache",
-        "/user/query"
+        "/slack/command",
+        "/slack/query",
+        "/slack/message",
+        "/slack/clean",
+        "/slack/sendMessage",
     ]
 
 

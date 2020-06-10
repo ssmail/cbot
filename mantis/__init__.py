@@ -6,6 +6,7 @@ import logging.config
 from datetime import date
 
 import yaml
+from flasgger import Swagger
 from flask import Flask, Response
 from flask.json import JSONEncoder, jsonify
 from flask_sqlalchemy import SQLAlchemy
@@ -40,7 +41,7 @@ class JSONResponse(Response):
 
 
 app = Flask("mantis")
-
+swagger = Swagger(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
