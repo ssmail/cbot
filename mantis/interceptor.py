@@ -121,7 +121,7 @@ def login_filter():
 @ignore_exception
 def show_request_param():
     if app.debug:
-        print("User:" + request.cookies.get(Auth.USERNAME, None) + ", Url：" + str(request.path))
+        print("User:" + request.cookies.get(Auth.USERNAME, "None User") + ", Url：" + str(request.path))
 
 
 @ignore_exception
