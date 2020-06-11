@@ -28,9 +28,6 @@ def auth_intercept():
     if request.path in AuthWhiteList.URL_PATH:
         return True
 
-    if '/sockjs-node/' in request.path:
-        return True
-
     b_token = request.cookies.get('b_token', None)
     b_username = request.cookies.get('username', None)
 
@@ -114,7 +111,7 @@ def login_filter():
     # all request will execute this flow
 
     # debug request basic info
-    # show_request_param()
+    show_request_param()
 
     # login check
     if not auth_intercept():
@@ -124,25 +121,19 @@ def login_filter():
 @ignore_exception
 def show_request_param():
     if app.debug:
-        if "sockjs-node" not in request.url:
-            print(request.method, "user:",
-                  request.cookies.get(Auth.USERNAME, None) + ", jellyfish_service Url：" + str(request.path))
-            if request.args: print("Param：" + json.dumps(request.args))
-            if request.form: print("Param：" + str(request.form))
+        pprint("User:" + request.cookies.get(Auth.USERNAME, None) + ", Url：" + str(request.path))
 
 
 @ignore_exception
 def show_response(environ):
     if app.debug:
-        print("Response:\b")
         pprint(json.loads(environ.response[0].strip()))
-        print("\n")
 
 
-# @app.after_request
-# def foot_log(environ):
-#     show_response(environ)
-#     return environ
+@app.after_request
+def foot_log(environ):
+    show_response(environ)
+    return environ
 
 
 @app.errorhandler(404)
