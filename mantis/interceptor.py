@@ -127,7 +127,10 @@ def show_request_param():
 @ignore_exception
 def show_response(environ):
     if app.debug:
-        pprint(json.loads(environ.response[0].strip()))
+        try:
+            pprint(json.loads(environ.response[0].strip()))
+        except:
+            pprint(environ.response[0].strip())
 
 
 @app.after_request
