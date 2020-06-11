@@ -54,5 +54,6 @@ def query_by():
 @user_api.route("/add", methods=['POST', 'GET'])
 @auth()
 def add():
-    user = User(username=request.json.get("username"), password=request.json.get("password")).save()
+    user = User(username=request.json.get("username"), password=request.json.get("password"))
+    user.save()
     return RespData(RespCode.SUCCESS, {"data": {"user": user.serialize_all}}, message="create user successfully")
