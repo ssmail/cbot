@@ -132,7 +132,7 @@ def send_message():
     ).first()
 
     if not slack_auth_user:
-        return jsonify({"error": "no user"})
+        return jsonify({"error": f"no this user: {username}"})
 
     print(command_type)
     print(slack_auth_user.serialize_all)
