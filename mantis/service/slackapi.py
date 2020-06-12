@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python3
 # author = CarterHong
-import json
+import datetime
 import logging
 import time
 import urllib
+import urllib.parse
 from dataclasses import dataclass
 from enum import Enum
 from random import randint
 
 import requests
 import urllib3
-import urllib.parse
 from typed_json_dataclass import TypedJsonMixin
 
 from mantis.config.config import ZoomRequestPayloadText
@@ -57,8 +57,8 @@ class ZoomCommand(Enum):
 
 
 class SlackMessageService:
-    query_api = 'https://devslackbot.zoomdev.us/api/query?key=online_1132683036224&type=zoom'
-    clean_api = 'https://devslackbot.zoomdev.us/api/clean?key=online_1132683036224'
+    query_api = 'https://devslackbot.zoomdev.us/api/slack/query?type=zoom&auth=ZytSVlBWc2swb2VGYlNXNklGR1Z1QT09'
+    clean_api = 'https://devslackbot.zoomdev.us/api/slack/clean'
     query_key = 'ZytSVlBWc2swb2VGYlNXNklGR1Z1QT09'
     query_api_headers = {"Query-Key": query_key}
 
@@ -184,13 +184,17 @@ class SlackMessageService:
         return self.fetch_channel_zoom_message()
 
 
+
 if __name__ == '__main__':
+    u = {'id': 7, 'workspace': 'lavglobal', 'username': 'lavender-pox1@grr.la', 'password': 'Slack@123',
+         'token': 'xoxc-876060768660-890689517665-1192926057073-a74cecd93c800066fe191db5c65f5bbf80bd8d2534ab1d120c02a58a081d7ee1',
+         'cookie': 'CF28SZ0zTFmhaLlwPg4WuH2NT7xPKkTkYO3pPHOfjnGYDO5PeKOe1NnhsDlB5sVsVGzOEHnqDUtKxCcGkAckT3yTrMTcOx0vtl3AjTogEruSfWKvpDXRrua%2FtAtJyh04%2FyfaTjKW8XEQCJ6oRwUILKC%2BkXucJl5F%2BX1g%2BoRsaC3Q%2B6C%2FIdxYZ6kj',
+         "date_created": "2020-05-26T06:25:51.681389",
+         "date_updated": "2020-06-12T07:18:50.801750",
+         }
+
     test_slack_user = AuthenticatedSlackUser(
-        workspace="carterbot",
-        username="carter.hong@zoomus.ltd",
-        password="Slack.123456",
-        token="xoxc-1066881550131-1116523971190-1155003621553-5041cf4ca410d331d3352dfe3407b4f820db8d52ce0e6075f3ba19d5f05bd107",
-        cookie="pSPq4zcxIpgnUACYLJgHD6fU3fg0qEAj5FspYRcPNo51kZCwb5ImHN0uAUg3V3ZXTjzfAKEfGSo0xDBn6NilQZETKpr063RiLkQVcHkLRIFWXjiVUCI5waq76uwuDsWymuPgHDQzYGqBya7cTqm6JgPQJYqPdhnp2gUrJRFn2ttm604e6CvDTMCpaw%3D%3D"
+        **u
     )
 
     print(test_slack_user)
@@ -198,5 +202,5 @@ if __name__ == '__main__':
 
     # /zoom
     # send message to channel [allmember]
-    zoom_message_1 = authorization_user_bot.send("C011V2G61P1", ZoomCommand.Zoom)
+    zoom_message_1 = authorization_user_bot.send("CRDMLKDNW", ZoomCommand.Zoom)
     print(zoom_message_1)

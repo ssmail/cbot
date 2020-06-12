@@ -8,7 +8,7 @@ class ZoomRequestPayloadText:
 {boundary}
 Content-Disposition: form-data; name="command"
 
-/zoom
+/zoomdev
 {boundary}
 Content-Disposition: form-data; name="disp"
 
@@ -43,11 +43,11 @@ true
 {boundary}
 Content-Disposition: form-data; name="command"
 
-/zoom
+/zoomdev
 {boundary}
 Content-Disposition: form-data; name="disp"
 
-/zoom
+/zoomdev
 {boundary}
 Content-Disposition: form-data; name="blocks"
 

@@ -12,8 +12,6 @@ chat_message = []
 
 keys = ['ZytSVlBWc2swb2VGYlNXNklGR1Z1QT09']
 
-ZOOM_BOT_LIST = ['B0146050FC3', 'B013S9M3N69', 'B01352MV8SJ', 'B012VE561RV', 'B013ESGTREH']
-
 
 class Token:
     value = ""
