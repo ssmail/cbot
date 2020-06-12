@@ -32,8 +32,8 @@ class AuthWhiteList:
         "/slack/clean",
         "/slack/sendMessage",
         "/account/add",
-        "/account/list"
-        "/account/update"
+        "/account/list",
+        "/account/update",
     ]
 
 
