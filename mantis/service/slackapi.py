@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python3
 # author = CarterHong
-import datetime
 import logging
 import time
 import urllib
@@ -90,6 +89,7 @@ class SlackMessageService:
         else:
             pass
 
+        print(data)
         logger.info(f"send zoom message: channel {channel_id}, {command}")
         return self.send_request(data)
 
@@ -184,14 +184,17 @@ class SlackMessageService:
         return self.fetch_channel_zoom_message()
 
 
-
 if __name__ == '__main__':
-    u = {'id': 7, 'workspace': 'lavglobal', 'username': 'lavender-pox1@grr.la', 'password': 'Slack@123',
-         'token': 'xoxc-876060768660-890689517665-1192926057073-a74cecd93c800066fe191db5c65f5bbf80bd8d2534ab1d120c02a58a081d7ee1',
-         'cookie': 'CF28SZ0zTFmhaLlwPg4WuH2NT7xPKkTkYO3pPHOfjnGYDO5PeKOe1NnhsDlB5sVsVGzOEHnqDUtKxCcGkAckT3yTrMTcOx0vtl3AjTogEruSfWKvpDXRrua%2FtAtJyh04%2FyfaTjKW8XEQCJ6oRwUILKC%2BkXucJl5F%2BX1g%2BoRsaC3Q%2B6C%2FIdxYZ6kj',
-         "date_created": "2020-05-26T06:25:51.681389",
-         "date_updated": "2020-06-12T07:18:50.801750",
-         }
+    u = {
+        "cookie": "O2Reu5DXjnTzgLWLn2KtS5eAcqs3DHo4qHGYjOOzvTIKzD%2FB5dLIvn%2Fwgj5vJk8kxJPl%2FX%2FoKOevIN4F4p%2FuQ82BXF%2F5Z0KWYtkYPOOHEm9p%2F6fBj9EfbSELfBDJE0YPQPll4HahBrw6jRx6oXG4Ab782Gj6esLWQ6LN7MdeMuIkLRXQsoZ0ZYLywA%3D%3D",
+        "date_created": "2020-06-12T07:02:35.489755",
+        "date_updated": "2020-06-12T07:22:58.066366",
+        "id": 10,
+        "password": "Slack.123456",
+        "token": "xoxc-1138179725558-1186159471972-1192928236673-f26391227f54b5dcc1800f018391644ea85d69fb3dd0356d2247a828822a5a65",
+        "username": "carter.hong_disable_pmi@zoomus.ltd",
+        "workspace": "accountlevel"
+    }
 
     test_slack_user = AuthenticatedSlackUser(
         **u
@@ -202,5 +205,5 @@ if __name__ == '__main__':
 
     # /zoom
     # send message to channel [allmember]
-    zoom_message_1 = authorization_user_bot.send("CRDMLKDNW", ZoomCommand.Zoom)
+    zoom_message_1 = authorization_user_bot.send("D015A6J4H3M", ZoomCommand.Zoom)
     print(zoom_message_1)
