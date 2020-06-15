@@ -69,6 +69,22 @@ class SlackUserList:
         token="",
         cookie=""
     )
+    a5 = SlackUser(
+        workspace="memberlevel",
+        username="carter.hong@waiae.com",
+        password="Dev.123456",
+        description="Admin账号",
+        token="",
+        cookie=""
+    )
+    a6 = SlackUser(
+        workspace="memberlevel",
+        username="carter.hong_nopmi@zoomus.ltd",
+        password="Slack.123456",
+        description="Admin账号",
+        token="",
+        cookie=""
+    )
     #
     # a2 = SlackUser(
     #     workspace="carterbot",
