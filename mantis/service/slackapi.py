@@ -89,7 +89,6 @@ class SlackMessageService:
         else:
             pass
 
-
         logger.info(f"send zoom message: channel {channel_id}, {command}")
         return self.send_request(data)
 
