@@ -157,7 +157,7 @@ class SlackMessageService:
         ).replace(
             "{token}", self.token
         ).replace(
-            "__TEXT__", '"join {meeting_id}"'
+            "__TEXT__", f'"join {meeting_id}"'
         )
 
     def fetch_channel_zoom_message(self):
