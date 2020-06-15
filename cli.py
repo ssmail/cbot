@@ -35,35 +35,35 @@ def init():
 
 
 class SlackUserList:
-    a1 = SlackUser(
-        workspace="accountlevel",
-        username="carter.hong_disable_pmi@zoomus.ltd",
-        password="Slack.123456",
-        description="Admin账号",
-        token="",
-        cookie=""
-    )
-
-    a2 = SlackUser(
-        workspace="accountlevel",
-        username="carter.hong_pmi2@zoomus.ltd",
-        password="Slack.123456",
-        description="Admin账号",
-        token="",
-        cookie=""
-    )
-    a3 = SlackUser(
-        workspace="accountlevel",
-        username="carter.hong_nopmi@zoomus.ltd",
-        password="Slack.123456",
-        description="Admin账号",
-        token="",
-        cookie=""
-    )
+    # a1 = SlackUser(
+    #     workspace="accountlevel",
+    #     username="carter.hong_disable_pmi@zoomus.ltd",
+    #     password="Slack.123456",
+    #     description="Admin账号",
+    #     token="",
+    #     cookie=""
+    # )
+    #
+    # a2 = SlackUser(
+    #     workspace="accountlevel",
+    #     username="carter.hong_pmi2@zoomus.ltd",
+    #     password="Slack.123456",
+    #     description="Admin账号",
+    #     token="",
+    #     cookie=""
+    # )
+    # a3 = SlackUser(
+    #     workspace="accountlevel",
+    #     username="carter.hong_nopmi@zoomus.ltd",
+    #     password="Slack.123456",
+    #     description="Admin账号",
+    #     token="",
+    #     cookie=""
+    # )
 
     a4 = SlackUser(
         workspace="accountlevel",
-        username="carter.hong_cn@cn.zoomus.ltd",
+        username="chrishong@outlook.com",
         password="Slack.123456",
         description="Admin账号",
         token="",
