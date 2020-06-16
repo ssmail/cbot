@@ -10,6 +10,7 @@ from flasgger import Swagger
 from flask import Flask, Response
 from flask.json import JSONEncoder, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.ext.declarative import declarative_base
 
 from mantis.config.constant import LogConfig
 from mantis.config.database import SQLALCHEMY_DATABASE_URI
@@ -79,11 +80,17 @@ from mantis.controller.user import user_api
 from mantis.controller.account import account_api
 from mantis.controller.slack import slack_api
 from mantis.controller.jira import jira_api
+from mantis.controller.cluster import cluster_api
 
 # app.register_blueprint(test_api)
 app.register_blueprint(user_api)
 app.register_blueprint(account_api)
 app.register_blueprint(slack_api)
 app.register_blueprint(jira_api)
+app.register_blueprint(cluster_api)
+
 app.debug = True
 app.config['CORS_HEADERS'] = 'Content-Type'
+
+Base = declarative_base()
+db.create_all()

@@ -9,7 +9,6 @@ import requests
 from sqlalchemy.ext.declarative import declarative_base
 
 from mantis import db
-from mantis.models.user import User
 
 
 @dataclass
@@ -36,31 +35,31 @@ def init():
 
 
 class SlackUserList:
-    # a1 = SlackUser(
-    #     workspace="accountlevel",
-    #     username="carter.hong_disable_pmi@zoomus.ltd",
-    #     password="Slack.123456",
-    #     description="Admin账号",
-    #     token="",
-    #     cookie=""
-    # )
-    #
-    # a2 = SlackUser(
-    #     workspace="accountlevel",
-    #     username="carter.hong_pmi2@zoomus.ltd",
-    #     password="Slack.123456",
-    #     description="Admin账号",
-    #     token="",
-    #     cookie=""
-    # )
-    # a3 = SlackUser(
-    #     workspace="accountlevel",
-    #     username="carter.hong_nopmi@zoomus.ltd",
-    #     password="Slack.123456",
-    #     description="Admin账号",
-    #     token="",
-    #     cookie=""
-    # )
+    a1 = SlackUser(
+        workspace="accountlevel",
+        username="carter.hong_disable_pmi@zoomus.ltd",
+        password="Slack.123456",
+        description="Admin账号",
+        token="",
+        cookie=""
+    )
+
+    a2 = SlackUser(
+        workspace="accountlevel",
+        username="carter.hong_pmi2@zoomus.ltd",
+        password="Slack.123456",
+        description="Admin账号",
+        token="",
+        cookie=""
+    )
+    a3 = SlackUser(
+        workspace="accountlevel",
+        username="carter.hong_nopmi@zoomus.ltd",
+        password="Slack.123456",
+        description="Admin账号",
+        token="",
+        cookie=""
+    )
 
     a4 = SlackUser(
         workspace="accountlevel",
@@ -86,68 +85,67 @@ class SlackUserList:
         token="",
         cookie=""
     )
-    #
-    # a2 = SlackUser(
-    #     workspace="carterbot",
-    #     username="carter.hong_a1@zoomus.ltd",
-    #     password="Slack.123456",
-    #     description="Admin账号",
-    #     token="",
-    #     cookie=""
-    # )
-    #
-    # a3 = SlackUser(
-    #     workspace="hongweb",
-    #     username="carter.hong_a1@zoomus.ltd",
-    #     password="Slack.123456",
-    #     description="Admin账号",
-    #     token="",
-    #     cookie=""
-    # )
-    # a4 = SlackUser(
-    #     workspace="carterbot",
-    #     username="carter.hong_cn@cn.zoomus.ltd",
-    #     password="Slack.123456",
-    #     description="cn用户",
-    #     token="",
-    #     cookie=""
-    # )
+    a66 = SlackUser(
+        workspace="carterbot",
+        username="carter.hong_a1@zoomus.ltd",
+        password="Slack.123456",
+        description="Admin账号",
+        token="",
+        cookie=""
+    )
 
-    # a5 = SlackUser(
-    #     workspace="lavglobal",
-    #     username="lavender-4@grr.la",
-    #     password="Slack@123",
-    #     description="cn用户",
-    #     token="",
-    #     cookie=""
-    # )
-    #
-    # a6 = SlackUser(
-    #     workspace="lavglobal",
-    #     username="lavender-pox1@grr.la",
-    #     password="Slack@123",
-    #     description="cn用户",
-    #     token="",
-    #     cookie=""
-    # )
-    #
-    # a7 = SlackUser(
-    #     workspace="lavglobal",
-    #     username="lavender-pox3@grr.la",
-    #     password="Slack@123",
-    #     description="cn用户",
-    #     token="",
-    #     cookie=""
-    # )
-    #
-    # a8 = SlackUser(
-    #     workspace="lavglobal",
-    #     username="lavender.song@zoom.us",
-    #     password="Slack@123",
-    #     description="cn用户",
-    #     token="",
-    #     cookie=""
-    # )
+    a44 = SlackUser(
+        workspace="hongweb",
+        username="carter.hong_a1@zoomus.ltd",
+        password="Slack.123456",
+        description="Admin账号",
+        token="",
+        cookie=""
+    )
+    a11 = SlackUser(
+        workspace="carterbot",
+        username="carter.hong_cn@cn.zoomus.ltd",
+        password="Slack.123456",
+        description="cn用户",
+        token="",
+        cookie=""
+    )
+
+    a21 = SlackUser(
+        workspace="lavglobal",
+        username="lavender-4@grr.la",
+        password="Slack@123",
+        description="cn用户",
+        token="",
+        cookie=""
+    )
+
+    a14 = SlackUser(
+        workspace="lavglobal",
+        username="lavender-pox1@grr.la",
+        password="Slack@123",
+        description="cn用户",
+        token="",
+        cookie=""
+    )
+
+    a7 = SlackUser(
+        workspace="lavglobal",
+        username="lavender-pox3@grr.la",
+        password="Slack@123",
+        description="cn用户",
+        token="",
+        cookie=""
+    )
+
+    a8 = SlackUser(
+        workspace="lavglobal",
+        username="lavender.song@zoom.us",
+        password="Slack@123",
+        description="cn用户",
+        token="",
+        cookie=""
+    )
 
 
 def init_user(slack: SlackUser):
@@ -159,12 +157,12 @@ def init_user(slack: SlackUser):
 SERVER_ADDRESS = "https://devslackbot.zoomdev.us/api/account/add?auth=ZytSVlBWc2swb2VGYlNXNklGR1Z1QT09"
 
 if __name__ == '__main__':
-    init_db()
+    # init_db()
     # issue = User("hongkefeng", "abc")
     # issue.save()
 
-    # # init_user(account_level_enable_pmi)
-    # for _ in SlackUserList.__dict__.keys():
-    #     if not _.startswith("__"):
-    #         user: SlackUser = SlackUserList.__dict__.get(_)
-    #         init_user(user)
+    # init_user(account_level_enable_pmi)
+    for _ in SlackUserList.__dict__.keys():
+        if not _.startswith("__"):
+            user: SlackUser = SlackUserList.__dict__.get(_)
+            init_user(user)
