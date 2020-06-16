@@ -11,6 +11,7 @@ from mantis import db
 class Issue(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     key = db.Column(db.String(64), index=True, nullable=False)
+    fix_version = db.Column(db.String(64), index=True, nullable=False)
     assignee = db.Column(db.String(64), index=True, nullable=False)
     status = db.Column(db.String(64), nullable=False)
     summary = db.Column(db.String(64), nullable=False)
@@ -19,6 +20,8 @@ class Issue(db.Model):
     link = db.Column(db.String(64), nullable=False)
     case_id = db.Column(db.String(32))
     testrail_project_id = db.Column(db.String(32))
+    review = db.Column(db.String(32), default="not_review", index=True)
+    has_removed = db.Column(db.String(16), default="0")
 
     date_created = db.Column(
         db.DateTime,

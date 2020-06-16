@@ -135,7 +135,7 @@ def show_response(environ):
 
 @app.after_request
 def foot_log(environ):
-    show_response(environ)
+    # show_response(environ)
     return environ
 
 

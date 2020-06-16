@@ -92,8 +92,74 @@ def fetch_case_id(link):
         return ""
 
 
-@jira_api.route("/ep/issue")
-def ep_issues():
+@jira_api.route("/ep/reviewCase", methods=['POST'])
+def review():
+    fix_version = request.form.get("fix_version", None)
+    jira_key = request.form.get("case", None)
+
+    print(fix_version)
+    print(jira_key)
+
+    all = Issue.query.all()
+
+    case: Issue = Issue.query.filter_by(
+        fix_version=fix_version,
+        key=jira_key
+    ).first()
+
+    for i in all:
+        print(i.serialize_all)
+
+    print(case)
+
+    if case:
+        case.review = "review"
+        case.save()
+        return jsonify({"issue": case.serialize_all})
+    else:
+        return jsonify({"error": "issue not found"})
+
+
+@jira_api.route("/ep/issue/query")
+def query_ep_issues():
+    fix_version = request.args.get("fix_version", None)
+    assignee = request.args.get("assignee", None)
+
+    print(fix_version)
+    print(assignee)
+
+    if not fix_version:
+        return jsonify({"error": "fix_version params should not be null"})
+
+    if assignee:
+        all_issue = Issue.query.filter_by(
+            assignee=assignee,
+            fix_version=fix_version
+        ).all()
+    else:
+        all_issue = Issue.query.filter_by(
+            fix_version=fix_version
+        ).all()
+
+    temp = Issue.query.filter_by(
+        fix_version=fix_version
+    ).all()
+    assignees = []
+    for i in temp:
+        if i.assignee not in assignees:
+            assignees.append(i.assignee)
+
+    return jsonify(
+        {
+            "total": len(all_issue),
+            "issues": [i.serialize_all for i in all_issue],
+            "assignees": assignees
+        }
+    )
+
+
+@jira_api.route("/ep/issue/sync")
+def sync_ep_issues():
     fix_version = request.args.get("fix_version", None)
 
     if not fix_version:
@@ -101,9 +167,6 @@ def ep_issues():
 
     issues = jira_service.query_issues(fix_version)
 
-    issue_list = []
-
-    print(len(issues))
     for issue in issues:
         assignee = tidy_name(get_path(issue, ['fields', 'assignee', "displayName"]))
         testrail = get_path(issue, ['fields', 'customfield_12501'])
@@ -113,6 +176,7 @@ def ep_issues():
         issue = Issue(
             key=issue['key'],
             assignee=assignee,
+            fix_version=fix_version,
             summary=get_path(issue, ["fields", 'summary']),
             properties=get_path(issue, ['fields', 'priority', 'name']),
             status=get_path(issue, ['fields', 'status', 'name']),
@@ -122,13 +186,54 @@ def ep_issues():
             testrail_project_id=testrail_project_id
         )
 
-        issue_list.append(issue.serialize_all)
+        data_in_db = Issue.query.filter_by(
+            key=issue.key,
+            fix_version=issue.fix_version
+        ).first()
+
+        print(data_in_db)
+
+        if not data_in_db:
+            issue.save()
+        else:
+            print("================")
+
+    all_issue = Issue.query.all()
 
     return jsonify(
         {
-            "total": len(issue_list),
-            "issues": issue_list,
+            "total": len(all_issue),
+            "issues": [i.serialize_all for i in all_issue],
             "code": 20000
+        }
+    )
+
+
+@jira_api.route("/ep/caseReviewProgress", methods=['GET'])
+def caseReviewProgress():
+    fix_version = request.args.get("fixVersion")
+
+    review_case = Issue.query.filter_by(
+        review="review",
+        fix_version=fix_version
+    ).count()
+
+    not_review = Issue.query.filter_by(
+        review="not_review",
+        fix_version=fix_version
+    ).count()
+
+    try:
+        percentage = round(review_case * 100 / (review_case + not_review), 2)
+    except:
+        percentage = 0
+
+    return jsonify(
+        {
+            "review": review_case,
+            "notReview": not_review,
+            "total": review_case + not_review,
+            "percentage": percentage
         }
     )
 

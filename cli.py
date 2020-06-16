@@ -9,6 +9,7 @@ import requests
 from sqlalchemy.ext.declarative import declarative_base
 
 from mantis import db
+from mantis.models.user import User
 
 
 @dataclass
@@ -158,9 +159,12 @@ def init_user(slack: SlackUser):
 SERVER_ADDRESS = "https://devslackbot.zoomdev.us/api/account/add?auth=ZytSVlBWc2swb2VGYlNXNklGR1Z1QT09"
 
 if __name__ == '__main__':
-    # init_db()
-    # init_user(account_level_enable_pmi)
-    for _ in SlackUserList.__dict__.keys():
-        if not _.startswith("__"):
-            user: SlackUser = SlackUserList.__dict__.get(_)
-            init_user(user)
+    init_db()
+    issue = User("hongkefeng", "abc")
+    issue.save()
+
+    # # init_user(account_level_enable_pmi)
+    # for _ in SlackUserList.__dict__.keys():
+    #     if not _.startswith("__"):
+    #         user: SlackUser = SlackUserList.__dict__.get(_)
+    #         init_user(user)
