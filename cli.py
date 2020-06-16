@@ -160,8 +160,8 @@ SERVER_ADDRESS = "https://devslackbot.zoomdev.us/api/account/add?auth=ZytSVlBWc2
 
 if __name__ == '__main__':
     init_db()
-    issue = User("hongkefeng", "abc")
-    issue.save()
+    # issue = User("hongkefeng", "abc")
+    # issue.save()
 
     # # init_user(account_level_enable_pmi)
     # for _ in SlackUserList.__dict__.keys():
