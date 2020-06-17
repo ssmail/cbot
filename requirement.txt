@@ -1,0 +1,6 @@
+pyyaml
+flasgger
+requests
+Flask-SQLAlchemy
+typed_json_dataclass
+testrail_api

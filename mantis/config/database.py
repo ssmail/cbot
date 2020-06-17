@@ -9,23 +9,23 @@ import os
 DEBUG = True
 DIALECT = 'mysql'
 DRIVER = 'pymysql'
-USERNAME = ''
-PASSWORD = ''
-HOST = '10.37.34.3'
+USERNAME = 'remote'
+PASSWORD = '.Carter0410'
+HOST = '10.100.83.189'
 PORT = 3306
-DATABASE = 'flask'
-#
-# SQLALCHEMY_DATABASE_URI = "{}+{}://{}:{}@{}:{}/{}?charset=utf8".format(
-#     DIALECT,
-#     DRIVER,
-#     USERNAME,
-#     PASSWORD,
-#     HOST,
-#     PORT,
-#     DATABASE
-# )
+DATABASE = 'skyline_dev'
+
+SQLALCHEMY_DATABASE_URI = "{}+{}://{}:{}@{}:{}/{}?charset=utf8".format(
+    DIALECT,
+    DRIVER,
+    USERNAME,
+    PASSWORD,
+    HOST,
+    PORT,
+    DATABASE
+)
 
 file_path = os.path.abspath(os.getcwd()) + "/db/database.db"
 
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + file_path
+# SQLALCHEMY_DATABASE_URI = 'sqlite:///' + file_path
 SQLALCHEMY_TRACK_MODIFICATIONS = False
