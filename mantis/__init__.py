@@ -71,6 +71,7 @@ db = SQLAlchemy(app)
 logging.config.dictConfig(yaml.load(LogConfig.LogCfg, Loader=yaml.FullLoader))
 logging.getLogger("testrail_api").setLevel(logging.WARNING)
 logging.getLogger("urllib3.connectionpool").setLevel(logging.WARNING)
+logging.getLogger("werkzeug").setLevel(logging.WARNING)
 # base server api
 from mantis import interceptor
 

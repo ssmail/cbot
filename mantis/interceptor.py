@@ -22,6 +22,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # http://locahost:/test/  equals http://localhost/test
 # url has no / sensitive
 app.url_map.strict_slashes = False
+import logging
 
 
 def auth_intercept():
@@ -121,7 +122,7 @@ def login_filter():
 @ignore_exception
 def show_request_param():
     if app.debug:
-        print("User:" + request.cookies.get(Auth.USERNAME, "None User") + ", Url：" + str(request.path))
+        logging.info("User:" + request.cookies.get(Auth.USERNAME, "None User") + ", Url：" + str(request.path))
 
 
 @ignore_exception
