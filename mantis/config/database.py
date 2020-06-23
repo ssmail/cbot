@@ -15,17 +15,17 @@ HOST = '10.100.83.189'
 PORT = 3306
 DATABASE = 'skyline_dev'
 
-SQLALCHEMY_DATABASE_URI = "{}+{}://{}:{}@{}:{}/{}?charset=utf8".format(
-    DIALECT,
-    DRIVER,
-    USERNAME,
-    PASSWORD,
-    HOST,
-    PORT,
-    DATABASE
-)
+# SQLALCHEMY_DATABASE_URI = "{}+{}://{}:{}@{}:{}/{}?charset=utf8".format(
+#     DIALECT,
+#     DRIVER,
+#     USERNAME,
+#     PASSWORD,
+#     HOST,
+#     PORT,
+#     DATABASE
+# )
 
 file_path = os.path.abspath(os.getcwd()) + "/db/database.db"
 
-# SQLALCHEMY_DATABASE_URI = 'sqlite:///' + file_path
-SQLALCHEMY_TRACK_MODIFICATIONS = False
+SQLALCHEMY_DATABASE_URI = 'sqlite:///' + file_path
+# SQLALCHEMY_TRACK_MODIFICATIONS = False
