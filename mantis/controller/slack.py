@@ -140,16 +140,16 @@ def send_message():
     slack_bot = SlackMessageService(slack_auth_user)
 
     if command_type.lower() == "zoom":
-        resp = slack_bot.send(channel, ZoomCommand.Zoom)
+        resp = slack_bot.send(channel, ZoomCommand.Zoom, env=env)
         return jsonify(resp)
     elif command_type == "ZoomMeetingTopic":
-        resp = slack_bot.send(channel, ZoomCommand.ZoomMeetingTopic, topic=extend)
+        resp = slack_bot.send(channel, ZoomCommand.ZoomMeetingTopic, topic=extend, env=env)
         return jsonify(resp)
     elif command_type == "ZoomJoinMe":
-        resp = slack_bot.send(channel, ZoomCommand.ZoomJoinMe, extend=extend)
+        resp = slack_bot.send(channel, ZoomCommand.ZoomJoinMe, extend=extend, env=env)
         return jsonify(resp)
     elif command_type == "ZoomJoinMeetingId":
-        resp = slack_bot.send(channel, ZoomCommand.ZoomJoinMeetingId, meeting_id=extend)
+        resp = slack_bot.send(channel, ZoomCommand.ZoomJoinMeetingId, meeting_id=extend, env=env)
         return jsonify(resp)
     else:
         return jsonify({"resp": f"error command: {command_type}"})
