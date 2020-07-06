@@ -91,7 +91,7 @@ class SlackMessageService:
             pass
 
         data = data.replace("/zoomdev", env)
-
+        print(data)
         logger.info(f"send zoom message: channel {channel_id}, {command}")
         return self.send_request(data)
 
