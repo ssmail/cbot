@@ -120,6 +120,7 @@ def send_message():
     username = request.json.get("slackUser")['username']
     workspace = request.json.get("slackUser")['workspace']
     channel = request.json.get("channel")
+    env = request.json.get("env")
 
     extend = request.json.get("extend")
     command_type = request.json.get("command")
@@ -132,6 +133,7 @@ def send_message():
     if not slack_auth_user:
         return jsonify({"error": f"no this user: {username}"})
 
+    print("env", env)
     print(command_type)
     print(slack_auth_user.serialize_all)
 
