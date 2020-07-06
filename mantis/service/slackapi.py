@@ -76,6 +76,7 @@ class SlackMessageService:
 
     def send(self, channel_id, command: ZoomCommand, **kwargs):
         data = ""
+        env = kwargs.get("env")
         if command == ZoomCommand.Zoom:
             data = self.__command_zoom(channel_id)
         elif command == ZoomCommand.ZoomMeetingTopic:
@@ -88,6 +89,8 @@ class SlackMessageService:
             data = self.__command_join_meeting_id(channel_id, meeting_id)
         else:
             pass
+
+        data = data.replace("/zoomdev", env)
 
         logger.info(f"send zoom message: channel {channel_id}, {command}")
         return self.send_request(data)
