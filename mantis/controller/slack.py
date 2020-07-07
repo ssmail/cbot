@@ -4,7 +4,7 @@ from flask import jsonify, request, Blueprint
 
 from mantis.common.utils import build_message
 from mantis.models.slack import Slack
-from mantis.service.slackapi import SlackMessageService, ZoomCommand
+from mantis.service.slackapi import SlackMessageService, ZoomCommand, call_button
 
 slack_api = Blueprint('slack', __name__, url_prefix='/slack')
 
@@ -153,3 +153,26 @@ def send_message():
         return jsonify(resp)
     else:
         return jsonify({"resp": f"error command: {command_type}"})
+
+
+@slack_api.route("/callButton", methods=['POST', 'GET'])
+def callButton():
+    key = request.headers.get('Query-Key')
+    if key not in keys:
+        logging.error(f"bad request: {request.remote_addr}")
+        return "bad request"
+
+    username = request.json.get("slackUser")['username']
+    workspace = request.json.get("slackUser")['workspace']
+    user = request.json.get("channel")
+    app = request.json.get("app")
+
+    slack_auth_user: Slack = Slack.query.filter_by(
+        username=username,
+        workspace=workspace
+    ).first()
+
+    if not slack_auth_user:
+        return jsonify({"error": f"no this user: {username}"})
+
+    call_button(slack_auth_user.token, slack_auth_user.cookie, user, app)

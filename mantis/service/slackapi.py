@@ -2,6 +2,7 @@
 # !/usr/bin/env python3
 # author = CarterHong
 import logging
+import os
 import time
 import urllib
 import urllib.parse
@@ -53,6 +54,46 @@ class ZoomCommand(Enum):
     ZoomMeetingTopic = 1, '/zoom meeting ${topic}'
     ZoomJoinMe = 2, '/zoom join me'
     ZoomJoinMeetingId = 3, '/zoom join ${meetingId}'
+
+
+def call_button(token, cookie, user, app):
+    curl_template = '''
+    curl -H 'Host: accountlevel.slack.com' -H 'Cookie: d=__COOKIE__;' -H 'pragma: no-cache' -H 'cache-control: no-cache' -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36' -H 'dnt: 1' -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundaryy5A5abZY5Lw9fuaA' -H 'accept: */*' -H 'origin: https://app.slack.com' -H 'sec-fetch-site: same-site' -H 'sec-fetch-mode: cors' -H 'sec-fetch-dest: empty' -H 'accept-language: en,zh;q=0.9,zh-CN;q=0.8,ja;q=0.7,la;q=0.6,zh-TW;q=0.5' -H 'query-key: ZytSVlBWc2swb2VGYlNXNklGR1Z1QT09' -H 'web-guard: TAScript' --data-binary '------WebKitFormBoundaryy5A5abZY5Lw9fuaA
+    Content-Disposition: form-data; name="channel"
+
+    __USER__
+    ------WebKitFormBoundaryy5A5abZY5Lw9fuaA
+    Content-Disposition: form-data; name="app"
+
+    __APP__
+    ------WebKitFormBoundaryy5A5abZY5Lw9fuaA
+    Content-Disposition: form-data; name="type"
+
+    video
+    ------WebKitFormBoundaryy5A5abZY5Lw9fuaA
+    Content-Disposition: form-data; name="token"
+
+    __TOKEN__
+    ------WebKitFormBoundaryy5A5abZY5Lw9fuaA
+    Content-Disposition: form-data; name="_x_reason"
+
+    call-button-clicked
+    ------WebKitFormBoundaryy5A5abZY5Lw9fuaA
+    Content-Disposition: form-data; name="_x_mode"
+
+    online
+    ------WebKitFormBoundaryy5A5abZY5Lw9fuaA
+    Content-Disposition: form-data; name="_x_sonic"
+
+    true
+    ------WebKitFormBoundaryy5A5abZY5Lw9fuaA--
+    ' --compressed 'https://accountlevel.slack.com/api/calls.request'
+    '''
+    n = curl_template.replace("__COOKIE__", cookie)
+    n = n.replace("__TOKEN__", token)
+    n = n.replace("__USER__", user)
+    n = n.replace("__APP__", app)
+    os.system(n)
 
 
 class SlackMessageService:
@@ -188,13 +229,13 @@ class SlackMessageService:
 
 if __name__ == '__main__':
     u = {
-        "cookie": "O2Reu5DXjnTzgLWLn2KtS5eAcqs3DHo4qHGYjOOzvTIKzD%2FB5dLIvn%2Fwgj5vJk8kxJPl%2FX%2FoKOevIN4F4p%2FuQ82BXF%2F5Z0KWYtkYPOOHEm9p%2F6fBj9EfbSELfBDJE0YPQPll4HahBrw6jRx6oXG4Ab782Gj6esLWQ6LN7MdeMuIkLRXQsoZ0ZYLywA%3D%3D",
-        "date_created": "2020-06-12T07:02:35.489755",
-        "date_updated": "2020-06-12T07:22:58.066366",
-        "id": 10,
+        "cookie": "uiYBiSdHf5M4hJKJcpoEV4p1iPy%2BumPgHYpao1I9YrZowJaDsQHG5lXoL1yJ3Jsk55qyhsVaEv34uWq9QMUF2QoQ4cwLPGHwCaF2eokESIOPD%2F9RFEWhLGHYxAJs16wilEl9bJGtIvrCniTW2LUeUTRQpDdwMg9t6r9p53VHdZGTPWVY1%2BtSmwDXqQ%3D%3D",
+        "date_created": "2020-06-16T08:26:52.315086",
+        "date_updated": "2020-07-07T00:01:16.031190",
+        "id": 3,
         "password": "Slack.123456",
-        "token": "xoxc-1138179725558-1186159471972-1192928236673-f26391227f54b5dcc1800f018391644ea85d69fb3dd0356d2247a828822a5a65",
-        "username": "carter.hong_disable_pmi@zoomus.ltd",
+        "token": "xoxc-1138179725558-1173280936982-1210939593591-daf6ea31fe63ecd6170646557bb5a3fd7430cc4344ee6211a744bf711422070e",
+        "username": "carter.hong_nopmi@zoomus.ltd",
         "workspace": "accountlevel"
     }
 
@@ -207,5 +248,5 @@ if __name__ == '__main__':
 
     # /zoom
     # send message to channel [allmember]
-    zoom_message_1 = authorization_user_bot.send("D015A6J4H3M", ZoomCommand.Zoom)
+    zoom_message_1 = authorization_user_bot.send("C014YN121NC", ZoomCommand.Zoom, env="/zoom")
     print(zoom_message_1)
