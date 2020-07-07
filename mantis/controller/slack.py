@@ -164,7 +164,7 @@ def callButton():
 
     username = request.json.get("slackUser")['username']
     workspace = request.json.get("slackUser")['workspace']
-    user = request.json.get("channel")
+    user = request.json.get("user")
     app = request.json.get("app")
 
     slack_auth_user: Slack = Slack.query.filter_by(
