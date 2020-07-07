@@ -162,6 +162,8 @@ def callButton():
         logging.error(f"bad request: {request.remote_addr}")
         return "bad request"
 
+    print(request.json)
+
     username = request.json.get("slackUser")['username']
     workspace = request.json.get("slackUser")['workspace']
     user = request.json.get("user")
