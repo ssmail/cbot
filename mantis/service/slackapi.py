@@ -57,37 +57,36 @@ class ZoomCommand(Enum):
 
 
 def call_button(token, cookie, user, app):
-    curl_template = '''
-    curl -H 'Host: accountlevel.slack.com' -H 'Cookie: d=__COOKIE__;' -H 'pragma: no-cache' -H 'cache-control: no-cache' -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36' -H 'dnt: 1' -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundaryy5A5abZY5Lw9fuaA' -H 'accept: */*' -H 'origin: https://app.slack.com' -H 'sec-fetch-site: same-site' -H 'sec-fetch-mode: cors' -H 'sec-fetch-dest: empty' -H 'accept-language: en,zh;q=0.9,zh-CN;q=0.8,ja;q=0.7,la;q=0.6,zh-TW;q=0.5' -H 'query-key: ZytSVlBWc2swb2VGYlNXNklGR1Z1QT09' -H 'web-guard: TAScript' --data-binary '------WebKitFormBoundaryy5A5abZY5Lw9fuaA
-    Content-Disposition: form-data; name="channel"
+    curl_template = '''curl -H 'Host: accountlevel.slack.com' -H 'Cookie: d=__COOKIE__;' -H 'pragma: no-cache' -H 'cache-control: no-cache' -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36' -H 'dnt: 1' -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundaryy5A5abZY5Lw9fuaA' -H 'accept: */*' -H 'origin: https://app.slack.com' -H 'sec-fetch-site: same-site' -H 'sec-fetch-mode: cors' -H 'sec-fetch-dest: empty' -H 'accept-language: en,zh;q=0.9,zh-CN;q=0.8,ja;q=0.7,la;q=0.6,zh-TW;q=0.5' -H 'query-key: ZytSVlBWc2swb2VGYlNXNklGR1Z1QT09' -H 'web-guard: TAScript' --data-binary '------WebKitFormBoundaryy5A5abZY5Lw9fuaA
+Content-Disposition: form-data; name="channel"
 
-    __USER__
-    ------WebKitFormBoundaryy5A5abZY5Lw9fuaA
-    Content-Disposition: form-data; name="app"
+__USER__
+------WebKitFormBoundaryy5A5abZY5Lw9fuaA
+Content-Disposition: form-data; name="app"
 
-    __APP__
-    ------WebKitFormBoundaryy5A5abZY5Lw9fuaA
-    Content-Disposition: form-data; name="type"
+__APP__
+------WebKitFormBoundaryy5A5abZY5Lw9fuaA
+Content-Disposition: form-data; name="type"
 
-    video
-    ------WebKitFormBoundaryy5A5abZY5Lw9fuaA
-    Content-Disposition: form-data; name="token"
+video
+------WebKitFormBoundaryy5A5abZY5Lw9fuaA
+Content-Disposition: form-data; name="token"
 
-    __TOKEN__
-    ------WebKitFormBoundaryy5A5abZY5Lw9fuaA
-    Content-Disposition: form-data; name="_x_reason"
+__TOKEN__
+------WebKitFormBoundaryy5A5abZY5Lw9fuaA
+Content-Disposition: form-data; name="_x_reason"
 
-    call-button-clicked
-    ------WebKitFormBoundaryy5A5abZY5Lw9fuaA
-    Content-Disposition: form-data; name="_x_mode"
+call-button-clicked
+------WebKitFormBoundaryy5A5abZY5Lw9fuaA
+Content-Disposition: form-data; name="_x_mode"
 
-    online
-    ------WebKitFormBoundaryy5A5abZY5Lw9fuaA
-    Content-Disposition: form-data; name="_x_sonic"
+online
+------WebKitFormBoundaryy5A5abZY5Lw9fuaA
+Content-Disposition: form-data; name="_x_sonic"
 
-    true
-    ------WebKitFormBoundaryy5A5abZY5Lw9fuaA--
-    ' --compressed 'https://accountlevel.slack.com/api/calls.request'
+true
+------WebKitFormBoundaryy5A5abZY5Lw9fuaA--
+' --compressed 'https://accountlevel.slack.com/api/calls.request'
     '''
     n = curl_template.replace("__COOKIE__", cookie)
     n = n.replace("__TOKEN__", token)
