@@ -93,6 +93,7 @@ def call_button(token, cookie, user, app):
     n = n.replace("__TOKEN__", token)
     n = n.replace("__USER__", user)
     n = n.replace("__APP__", app)
+    print(n)
     os.system(n)
 
 
