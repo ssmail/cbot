@@ -172,7 +172,10 @@ def callButton():
         workspace=workspace
     ).first()
 
+    print(slack_auth_user.serialize_all)
+
     if not slack_auth_user:
         return jsonify({"error": f"no this user: {username}"})
 
+    print("call button")
     call_button(slack_auth_user.token, slack_auth_user.cookie, user, app)
