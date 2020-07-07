@@ -181,3 +181,4 @@ def callButton():
 
     print("call button")
     call_button(slack_auth_user.token, slack_auth_user.cookie, user, app)
+    return jsonify({"success": True})
