@@ -35,6 +35,9 @@ class AuthWhiteList:
         "/account/add",
         "/account/list",
         "/account/update",
+        '/qa/epic/go',
+        '/qa/epic/query',
+
     ]
 
 
