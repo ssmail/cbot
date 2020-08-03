@@ -61,16 +61,16 @@ def headers():
 
 @slack_api.route("/command", methods=['GET', 'POST'])
 def command():
-    return jsonify(
-        {
-            "cookies": request.cookies,
-            "method": request.method,
-            "headers": headers(),
-            "args": request.args,
-            "json": request.json,
-            "form": request.form,
-        }
-    )
+    info = {
+        "cookies": request.cookies,
+        "method": request.method,
+        "headers": headers(),
+        "args": request.args,
+        "json": request.json,
+        "form": request.form,
+    }
+    print(info)
+    return jsonify(info)
 
 
 @slack_api.route("/query", methods=['GET', 'POST'])

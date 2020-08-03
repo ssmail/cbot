@@ -82,6 +82,7 @@ from mantis.controller.account import account_api
 from mantis.controller.slack import slack_api
 from mantis.controller.jira import jira_api
 from mantis.controller.cluster import cluster_api
+from mantis.controller.epic import epic_api
 
 # app.register_blueprint(test_api)
 app.register_blueprint(user_api)
@@ -89,6 +90,7 @@ app.register_blueprint(account_api)
 app.register_blueprint(slack_api)
 app.register_blueprint(jira_api)
 app.register_blueprint(cluster_api)
+app.register_blueprint(epic_api)
 
 app.debug = True
 app.config['CORS_HEADERS'] = 'Content-Type'
