@@ -12,8 +12,8 @@ from mantis import db
 class Epic(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     zoomMeetingId = db.Column(db.String(64), index=True, nullable=False)
-    cluster = db.Column(db.String(64), index=True, nullable=False)
-    value = db.Column(db.String(1024), nullable=False)
+    cluster = db.Column(db.String(64))
+    value = db.Column(db.String(1024))
 
     date_created = db.Column(
         db.DateTime,
