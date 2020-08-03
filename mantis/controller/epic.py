@@ -22,8 +22,5 @@ def query():
     epic_list = Epic.query.filter(Epic.zoomMeetingId == meeting_id).all()
     l = []
     for i in epic_list:
-        l.append({
-            'meeting_id': i.zoomMeetingId,
-            'info': json.loads(i.value)
-        })
-    return jsonify({'meeting_id': l})
+        l.append(json.loads(i.value))
+    return jsonify({'meeting_id': meeting_id, "list": l})
