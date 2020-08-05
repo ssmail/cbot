@@ -11,6 +11,7 @@ epic_api = Blueprint('epic', __name__, url_prefix='/qa/epic')
 def index():
     meeting_id = request.args.get('ZoomMeetingId')
     value = json.dumps(request.args.to_dict())
+    print(value)
     epic = Epic(zoomMeetingId=meeting_id, value=value, cluster='go')
     epic.save()
     return jsonify({'meeting_id': epic.serialize_all})
