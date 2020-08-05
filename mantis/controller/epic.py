@@ -14,6 +14,9 @@ def index():
     print(value)
     epic = Epic(zoomMeetingId=meeting_id, value=value, cluster='go')
     epic.save()
+    print('--------------------------')
+    print(epic.serialize_all)
+    print('--------------------------')
     return jsonify({'meeting_id': epic.serialize_all})
 
 
