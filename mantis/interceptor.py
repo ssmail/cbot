@@ -26,13 +26,15 @@ import logging
 
 
 def auth_intercept():
-    print(request.path)
     tmp = str(request.path)
+    print(request.path)
     print(tmp.replace('/api', ''))
-    print(AuthWhiteList)
+    print(AuthWhiteList.URL_PATH)
 
     if tmp.replace('/api', '') in AuthWhiteList.URL_PATH:
         return True
+    else:
+        print('not a white list url')
 
     b_token = request.cookies.get('b_token', None)
     b_username = request.cookies.get('username', None)
