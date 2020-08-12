@@ -28,6 +28,9 @@ import logging
 def auth_intercept():
     print(request.path)
     tmp = str(request.path)
+    print(tmp.replace('/api', ''))
+    print(AuthWhiteList)
+
     if tmp.replace('/api', '') in AuthWhiteList.URL_PATH:
         return True
 
