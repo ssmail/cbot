@@ -26,6 +26,8 @@ import logging
 
 
 def auth_intercept():
+    print(request.path)
+    print(AuthWhiteList.URL_PATH)
     if request.path in AuthWhiteList.URL_PATH:
         return True
 
