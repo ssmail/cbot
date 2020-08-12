@@ -26,7 +26,9 @@ import logging
 
 
 def auth_intercept():
-    if request.path.replace('/api', '') in AuthWhiteList.URL_PATH:
+    print(request.path)
+    tmp = str(request.path)
+    if tmp.replace('/api', '') in AuthWhiteList.URL_PATH:
         return True
 
     b_token = request.cookies.get('b_token', None)
