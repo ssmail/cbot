@@ -35,114 +35,132 @@ def init():
 
 
 class SlackUserList:
-    a1 = SlackUser(
-        workspace="accountlevel",
-        username="carter.hong_disable_pmi@zoomus.ltd",
-        password="Slack.123456",
-        description="Admin账号",
-        token="",
-        cookie=""
-    )
+    # a1 = SlackUser(
+    #     workspace="accountlevel",
+    #     username="carter.hong_disable_pmi@zoomus.ltd",
+    #     password="Slack.123456",
+    #     description="Admin账号",
+    #     token="",
+    #     cookie=""
+    # )
+    #
+    # a2 = SlackUser(
+    #     workspace="accountlevel",
+    #     username="carter.hong_pmi2@zoomus.ltd",
+    #     password="Slack.123456",
+    #     description="Admin账号",
+    #     token="",
+    #     cookie=""
+    # )
+    # a3 = SlackUser(
+    #     workspace="accountlevel",
+    #     username="carter.hong_nopmi@zoomus.ltd",
+    #     password="Slack.123456",
+    #     description="Admin账号",
+    #     token="",
+    #     cookie=""
+    # )
+    #
+    # a4 = SlackUser(
+    #     workspace="accountlevel",
+    #     username="chrishong@outlook.com",
+    #     password="Slack.123456",
+    #     description="Admin账号",
+    #     token="",
+    #     cookie=""
+    # )
+    # a5 = SlackUser(
+    #     workspace="memberlevel",
+    #     username="carter.hong@waiae.com",
+    #     password="Dev.123456",
+    #     description="Admin账号",
+    #     token="",
+    #     cookie=""
+    # )
+    # a6 = SlackUser(
+    #     workspace="memberlevel",
+    #     username="carter.hong_nopmi@zoomus.ltd",
+    #     password="Slack.123456",
+    #     description="Admin账号",
+    #     token="",
+    #     cookie=""
+    # )
+    # a66 = SlackUser(
+    #     workspace="carterbot",
+    #     username="carter.hong_a1@zoomus.ltd",
+    #     password="Slack.123456",
+    #     description="Admin账号",
+    #     token="",
+    #     cookie=""
+    # )
+    #
+    # a44 = SlackUser(
+    #     workspace="hongweb",
+    #     username="carter.hong_a1@zoomus.ltd",
+    #     password="Slack.123456",
+    #     description="Admin账号",
+    #     token="",
+    #     cookie=""
+    # )
+    # a11 = SlackUser(
+    #     workspace="carterbot",
+    #     username="carter.hong_cn@cn.zoomus.ltd",
+    #     password="Slack.123456",
+    #     description="cn用户",
+    #     token="",
+    #     cookie=""
+    # )
+    #
+    # a21 = SlackUser(
+    #     workspace="lavglobal",
+    #     username="lavender-4@grr.la",
+    #     password="Slack@123",
+    #     description="cn用户",
+    #     token="",
+    #     cookie=""
+    # )
+    #
+    # a14 = SlackUser(
+    #     workspace="lavglobal",
+    #     username="lavender-pox1@grr.la",
+    #     password="Slack@123",
+    #     description="cn用户",
+    #     token="",
+    #     cookie=""
+    # )
+    #
+    # a7 = SlackUser(
+    #     workspace="lavglobal",
+    #     username="lavender-pox3@grr.la",
+    #     password="Slack@123",
+    #     description="cn用户",
+    #     token="",
+    #     cookie=""
+    # )
+    #
+    # a8 = SlackUser(
+    #     workspace="lavglobal",
+    #     username="lavender.song@zoom.us",
+    #     password="Slack@123",
+    #     description="cn用户",
+    #     token="",
+    #     cookie=""
+    # )
 
-    a2 = SlackUser(
-        workspace="accountlevel",
-        username="carter.hong_pmi2@zoomus.ltd",
-        password="Slack.123456",
-        description="Admin账号",
-        token="",
-        cookie=""
-    )
-    a3 = SlackUser(
-        workspace="accountlevel",
-        username="carter.hong_nopmi@zoomus.ltd",
-        password="Slack.123456",
-        description="Admin账号",
-        token="",
-        cookie=""
-    )
-
-    a4 = SlackUser(
-        workspace="accountlevel",
-        username="chrishong@outlook.com",
-        password="Slack.123456",
-        description="Admin账号",
-        token="",
-        cookie=""
-    )
-    a5 = SlackUser(
-        workspace="memberlevel",
-        username="carter.hong@waiae.com",
-        password="Dev.123456",
-        description="Admin账号",
-        token="",
-        cookie=""
-    )
-    a6 = SlackUser(
-        workspace="memberlevel",
-        username="carter.hong_nopmi@zoomus.ltd",
-        password="Slack.123456",
-        description="Admin账号",
-        token="",
-        cookie=""
-    )
-    a66 = SlackUser(
-        workspace="carterbot",
-        username="carter.hong_a1@zoomus.ltd",
-        password="Slack.123456",
-        description="Admin账号",
-        token="",
-        cookie=""
-    )
-
-    a44 = SlackUser(
-        workspace="hongweb",
-        username="carter.hong_a1@zoomus.ltd",
-        password="Slack.123456",
-        description="Admin账号",
-        token="",
-        cookie=""
-    )
-    a11 = SlackUser(
-        workspace="carterbot",
-        username="carter.hong_cn@cn.zoomus.ltd",
-        password="Slack.123456",
-        description="cn用户",
-        token="",
-        cookie=""
-    )
+    # a20 = SlackUser(
+    #     workspace="accountlevel",
+    #     username="carter.hong@go.zoomus.ltd",
+    #     password="Slack.123456",
+    #     description="GO",
+    #     token="",
+    #     cookie=""
+    # )
 
     a21 = SlackUser(
-        workspace="lavglobal",
-        username="lavender-4@grr.la",
+        workspace="zoomta",
+        username="lavender-ta-1@waiae.com",
         password="Slack@123",
-        description="cn用户",
-        token="",
-        cookie=""
-    )
-
-    a14 = SlackUser(
-        workspace="lavglobal",
-        username="lavender-pox1@grr.la",
-        password="Slack@123",
-        description="cn用户",
-        token="",
-        cookie=""
-    )
-
-    a7 = SlackUser(
-        workspace="lavglobal",
-        username="lavender-pox3@grr.la",
-        password="Slack@123",
-        description="cn用户",
-        token="",
-        cookie=""
-    )
-
-    a8 = SlackUser(
-        workspace="lavglobal",
-        username="lavender.song@zoom.us",
-        password="Slack@123",
-        description="cn用户",
+        description="GO",
         token="",
         cookie=""
     )
