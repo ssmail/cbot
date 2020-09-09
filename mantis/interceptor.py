@@ -4,6 +4,7 @@
 
 import datetime
 import json
+import logging
 import uuid
 from pprint import pprint
 
@@ -22,14 +23,10 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # http://locahost:/test/  equals http://localhost/test
 # url has no / sensitive
 app.url_map.strict_slashes = False
-import logging
 
 
 def auth_intercept():
     tmp = str(request.path)
-    print(request.path)
-    print(tmp.replace('/api', ''))
-    print(AuthWhiteList.URL_PATH)
 
     if tmp.replace('/api', '') in AuthWhiteList.URL_PATH:
         return True

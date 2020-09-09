@@ -156,11 +156,35 @@ class SlackUserList:
     #     cookie=""
     # )
 
-    a21 = SlackUser(
+    # a21 = SlackUser(
+    #     workspace="zoomta",
+    #     username="lavender-ta-1@waiae.com",
+    #     password="Slack@123",
+    #     description="GO",
+    #     token="",
+    #     cookie=""
+    # )
+    a22 = SlackUser(
+        workspace="memberlevel",
+        username="mct.slack01@free.zoomus.ltd",
+        password="P@ss1234",
+        description="free",
+        token="",
+        cookie=""
+    )
+    a23 = SlackUser(
+        workspace="memberlevel",
+        username="mct.slack01@us02.zoomus.ltd",
+        password="P@ss1234",
+        description="us02",
+        token="",
+        cookie=""
+    )
+    a24 = SlackUser(
         workspace="zoomta",
-        username="lavender-ta-1@waiae.com",
-        password="Slack@123",
-        description="GO",
+        username="mct.slack01@zoomus.ltd",
+        password="P@ss1234",
+        description="aw1",
         token="",
         cookie=""
     )

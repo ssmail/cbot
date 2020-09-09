@@ -12,7 +12,7 @@ epic_api = Blueprint('epic', __name__, url_prefix='/qa/epic')
 def index():
     meeting_id = request.args.get('ZoomMeetingId')
     d = request.args.to_dict()
-    d['time'] = datetime.datetime.now
+    d['time'] = datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
     value = json.dumps(d)
     print(value)
     epic = Epic(zoomMeetingId=meeting_id, value=value, cluster='go')
