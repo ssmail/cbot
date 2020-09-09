@@ -1,3 +1,4 @@
+import datetime
 import json
 
 from flask import jsonify, request, Blueprint
@@ -10,7 +11,9 @@ epic_api = Blueprint('epic', __name__, url_prefix='/qa/epic')
 @epic_api.route('/go', methods=['POST', 'GET'])
 def index():
     meeting_id = request.args.get('ZoomMeetingId')
-    value = json.dumps(request.args.to_dict())
+    d = request.args.to_dict()
+    d['time'] = datetime.datetime.now
+    value = json.dumps(d)
     print(value)
     epic = Epic(zoomMeetingId=meeting_id, value=value, cluster='go')
     epic.save()
@@ -23,7 +26,7 @@ def index():
 @epic_api.route('/query', methods=['POST', 'GET'])
 def query():
     meeting_id = request.args.get('ZoomMeetingId')
-    epic_list = Epic.query.filter(Epic.zoomMeetingId == meeting_id).all()
+    epic_list = Epic.query.filter(Epic.zoomMeetingId == meeting_id).order_by(Epic.date_created).all()
     l = []
     for i in epic_list:
         l.append(json.loads(i.value))
