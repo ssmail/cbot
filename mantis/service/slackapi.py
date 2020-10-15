@@ -137,10 +137,15 @@ class SlackMessageService:
         return self.send_request(data)
 
     def send_request(self, data):
+        headers = self._get_header()
+        cookies = self._get_cookie()
+
+        headers['cookie'] = f'd={cookies["d"]}'
+
         response = self.session.post(
             self.workspace_api,
-            headers=self._get_header(),
-            cookies=self._get_cookie(),
+            headers=headers,
+            cookies=cookies,
             data=data,
             verify=False,
         )
@@ -229,15 +234,15 @@ class SlackMessageService:
 
 if __name__ == '__main__':
     u = {
-        "cookie": "uiYBiSdHf5M4hJKJcpoEV4p1iPy%2BumPgHYpao1I9YrZowJaDsQHG5lXoL1yJ3Jsk55qyhsVaEv34uWq9QMUF2QoQ4cwLPGHwCaF2eokESIOPD%2F9RFEWhLGHYxAJs16wilEl9bJGtIvrCniTW2LUeUTRQpDdwMg9t6r9p53VHdZGTPWVY1%2BtSmwDXqQ%3D%3D",
-        "date_created": "2020-06-16T08:26:52.315086",
-        "date_updated": "2020-07-07T00:01:16.031190",
-        "id": 3,
-        "password": "Slack.123456",
-        "token": "xoxc-1138179725558-1173280936982-1210939593591-daf6ea31fe63ecd6170646557bb5a3fd7430cc4344ee6211a744bf711422070e",
-        "username": "carter.hong_nopmi@zoomus.ltd",
-        "workspace": "accountlevel"
-    }
+"cookie": "lt9ohAecYQxZQe476MOUOm%2Bp8EnDBgwNHmVLHVWSRRtQPka0A9BEdyuOPb8QG5iSgLztZrkSHwALGhIMxUMKSUDfGtLUQrLnUa8fGkzm2%2FOUKmUR6Had%2BvQ2H1PonPIfitM0Zvh0%2B4pT4kuljq7ZuJTKodX4EQD0rEq5QYuFilRSEfgFchsaKFyr2A%3D%3D",
+"date_created": "2020-09-09T08:48:50.062517",
+"date_updated": "2020-10-15T00:04:17.983355",
+"id": 19,
+"password": "P@ss1234",
+"token": "xoxc-1141395672167-1357248393364-1429467922258-aa5559251d8505fd228061e02d65ad431390fd7ffdfb2db8f78687d8daf6ecc6",
+"username": "mct.slack01@zoomus.ltd",
+"workspace": "memberlevel"
+}
 
     test_slack_user = AuthenticatedSlackUser(
         **u
