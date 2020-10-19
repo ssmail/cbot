@@ -28,6 +28,17 @@ def list_all():
     return jsonify({"all": [slack.serialize_all for slack in all_account]})
 
 
+@account_api.route('/delete', methods=['POST', 'GET'])
+def list_all():
+    uid = request.args.get('uid')
+    a = Slack.query.get(uid)
+    if a:
+        a.delete()
+        return jsonify({"message": 'delete success'})
+    else:
+        return jsonify({'message': 'not found'})
+
+
 @account_api.route('/query', methods=['POST', 'GET'])
 @require("username", "workspace")
 @auth()
