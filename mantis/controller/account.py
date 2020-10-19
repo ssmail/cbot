@@ -29,7 +29,7 @@ def list_all():
 
 
 @account_api.route('/delete', methods=['POST', 'GET'])
-def list_all():
+def delete():
     uid = request.args.get('uid')
     a = Slack.query.get(uid)
     if a:
