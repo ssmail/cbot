@@ -34,10 +34,10 @@ class AuthWhiteList:
         "/slack/callButton",
         "/account/add",
         "/account/list",
+        "/account/delete",
         "/account/update",
         '/qa/epic/go',
         '/qa/epic/query',
-
     ]
 
 
