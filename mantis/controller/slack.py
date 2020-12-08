@@ -132,8 +132,8 @@ def send_message():
     if not slack_auth_user:
         return jsonify({"error": f"no this user: {username}"})
 
-    print(command_type)
-    print(slack_auth_user.serialize_all)
+    # print(command_type)
+    # print(slack_auth_user.serialize_all)
 
     slack_bot = SlackMessageService(slack_auth_user)
 
